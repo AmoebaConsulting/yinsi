@@ -3,31 +3,34 @@ include SugarCube::Adjust
 class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+
     # Adding Motion-Xray's UIWindow shim
     #@window = Motion::Xray::XrayWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    myNavController = RootController.alloc.init
 
-    @window.rootViewController = UINavigationController.alloc.initWithRootViewController(myNavController)
-    @window.rootViewController.wantsFullScreenLayout = true
-    #Splash Screen
-    image_view = UIImageView.alloc.initWithImage('Default'.uiimage) # automatically grabs correct image for phone
-    @window.rootViewController.view << image_view
-    @window.rootViewController.view.bringSubviewToFront(image_view)
-    # normal
+    @myRootController = RootController.controller
+
+    @tabController = UITabBarController.alloc.initWithNibName(nil, bundle: nil)
+    @tabController.viewControllers = [@myRootController]
+    @tabController.wantsFullScreenLayout = true
+    @window.rootViewController = @tabController
     @window.makeKeyAndVisible
 
-    # fade out splash image
-    image_view.fade_out (duration: 1.0,
-                          delay: 0.2,
-                          options: UIViewAnimationOptionCurveLinear,
-                          opacity: 0) {
-      image_view.removeFromSuperview
-      image_view = nil #little extra cleanup
-    }
+    # If we aint logged in
+    if App::Persistence['authToken'].nil?
+      showLoginController
+    end
 
     # include the SaveUIPlugin, which is not included by default
     #Motion::Xray.register(Motion::Xray::SaveUIPlugin.new)
 
     true
   end
+
+  def showLoginController
+    @loginController = LoginController.alloc.initWithNibName(nil, bundle: nil)
+    @myRootController.presentModalViewController(@loginController, animated: true)
+
+    puts "NOT LOGGED IN"
+  end
+
 end

@@ -1,3 +1,6 @@
+#
+#TODO: Remove this stylesheet
+#
 Teacup::Stylesheet.new :base_leather do
   @back_color = 0xc3a477.uicolor 
   @dark_color = 0x4d3e33.uicolor

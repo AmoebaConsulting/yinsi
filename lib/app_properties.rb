@@ -1,18 +1,14 @@
 class AppProperties
-  VERSION = '1.7'
-  SKU_NAME = 'motiontemplate' 
-  COMPANY_NAME = 'com.iconoclastlabs.'
+  VERSION = '1.0'
+  SKU_NAME = 'yinsimobile'
+  COMPANY_NAME = 'ba.amoe.'
 
   def name
-    'Motion Template'
+    'Yinsi Mobile'
   end
 
   def version
     VERSION
-  end
-
-  def self.root_style
-    :base_leather # could also be - :basic
   end
 
   def frameworks
@@ -20,15 +16,15 @@ class AppProperties
   end
 
   def contributors
-    ["Gant Laborde", "Matt Garrison"]
+    ["Daniel Jabbour"]
   end
 
   def developer_certificate
-    "iPhone Developer: Matt Garrison"
+    "iPhone Developer: Daniel Jabbour"
   end
 
   def distribution_certificate
-    "iPhone Distribution: Iconoclast Labs LLC"
+    "iPhone Distribution: Amoeba Consulting, LLC"
   end
 
   def provisioning

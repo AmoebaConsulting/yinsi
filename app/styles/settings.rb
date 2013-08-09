@@ -1,5 +1,5 @@
 Teacup::Stylesheet.new :settings do
-  import AppProperties.root_style
+  import :yinsi_application
 
   v_padding = 10
   h_padding = 10

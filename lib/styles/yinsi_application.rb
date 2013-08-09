@@ -1,10 +1,17 @@
-Teacup::Stylesheet.new :basic do
+Teacup::Stylesheet.new :yinsi_application do
+  @green = "#A5E200".to_color
+  @green_medium = "#89BB00".to_color
+  @green_ultra_light = "#E6F9B2".to_color
+  @green_light = "#D1F963".to_color
+
+  @grey = "#A5E200".to_color
+  @grey_dark = "#333B3D".to_color
+
+  @white = "#FFFFFF".to_color
+
   @back_color = :white
   @dark_color = 0x2a487f.uicolor 
   @mid_color = 0x8ea1bc.uicolor
-
-  style UIView,
-    backgroundColor: 'basice/neutral'.uicolor
 
   style :custom_label,
     text: 'App Stuff!',

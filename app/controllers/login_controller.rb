@@ -7,14 +7,18 @@ class LoginController < UIViewController
     @label = subview(UILabel, :title)
     @username = subview(UITextField, :username)
     @password = subview(UITextField, :password)
+    @login = subview(UIButton, :login)
+    @register = subview(UIButton.custom, :register)
 
     auto do
       metrics 'margin' => 20
 
-      vertical "|-50-[title]-75-[username]-margin-[password]"
+      vertical "|-50-[title]-75-[username]-margin-[password]-margin-[login(==60)]->=20-[register(==40)]-margin-|"
       horizontal "|-[title]-|"
       horizontal "|-margin-[username]-margin-|"
       horizontal "|-margin-[password]-margin-|"
+      horizontal "|-margin-[login]-margin-|"
+      horizontal "|-margin-[register]-margin-|"
     end
   end
 

@@ -4,7 +4,7 @@ Teacup::Stylesheet.new :yinsi_application do
   @green_ultra_light = "#E6F9B2".to_color
   @green_light = "#D1F963".to_color
 
-  @grey = "#A5E200".to_color
+  @grey = "#424C4D".to_color
   @grey_dark = "#333B3D".to_color
 
   @white = "#FFFFFF".to_color

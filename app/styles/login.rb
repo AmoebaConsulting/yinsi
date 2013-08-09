@@ -36,4 +36,19 @@ Teacup::Stylesheet.new :login do
     returnKeyType: :go,
     secure: true
 
+  style :big_button,
+    backgroundColor: @grey_dark,
+    titleColor: @white
+
+  style :login, extends: :big_button,
+    height: 60,
+    title: "Login",
+    font: :bold.uifont(24)
+
+  style :register, extends: :big_button,
+    backgroundColor: @grey,
+    height: 40,
+    title: "Register",
+    font: :bold.uifont(16)
+
 end

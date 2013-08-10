@@ -17,7 +17,9 @@ class AppDelegate
 
     # If we aint logged in
     if App::Persistence['authToken'].nil?
-      showLoginController
+      App.run_after(0.1) do
+        showLoginController
+      end
     end
 
     # include the SaveUIPlugin, which is not included by default

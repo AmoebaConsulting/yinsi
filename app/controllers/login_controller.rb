@@ -5,20 +5,20 @@ class LoginController < UIViewController
 
   layout :login do
     @label = subview(UILabel, :title)
-    @username = subview(UITextField, :username)
-    @password = subview(UITextField, :password)
-    @login = subview(UIButton, :login)
-    @register = subview(UIButton.custom, :register)
+    @username = subview(UITextField, :username, delegate: self)
+    @password = subview(UITextField, :password, delegate: self)
+    @login_button = subview(UIButton, :login_button)
+    @register_button = subview(UIButton.custom, :register_button)
 
     auto do
       metrics 'margin' => 20
 
-      vertical "|-50-[title]-75-[username]-margin-[password]-margin-[login(==60)]->=20-[register(==40)]-margin-|"
+      vertical "|-50-[title]-75-[username]-margin-[password]-margin-[login_button(==60)]->=20-[register_button(==40)]-margin-|"
       horizontal "|-[title]-|"
       horizontal "|-margin-[username]-margin-|"
       horizontal "|-margin-[password]-margin-|"
-      horizontal "|-margin-[login]-margin-|"
-      horizontal "|-margin-[register]-margin-|"
+      horizontal "|-margin-[login_button]-margin-|"
+      horizontal "|-margin-[register_button]-margin-|"
     end
   end
 
@@ -28,12 +28,17 @@ class LoginController < UIViewController
     animate_text_field(@password)
   end
 
+  # Delegate method for text fields exiting focus
+  def textFieldShouldReturn(text_field)
+    case text_field
+      when @username
+        text_field.resignFirstResponder
+        @password.becomeFirstResponder
+      else
+        dismiss
+    end
 
-
-  #def push_settings
-  #  @settings = SettingsController.new
-  #  self.navigationController << @settings
-  #end
+  end
 
   def dismiss
     RootController.controller.dismissModalViewControllerAnimated(true)

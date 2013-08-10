@@ -51,3 +51,7 @@ gem "motion-rubberstamp",     "0.0.6"
 # Prints objects in full color w/ proper indents
 #
 gem "awesome_print_motion",   "0.1.0"
+
+# Lets us use the cocoapods ObjC dependency manager
+#
+gem "motion-cocoapods", "~> 1.3.5"

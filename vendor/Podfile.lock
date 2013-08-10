@@ -1,0 +1,14 @@
+PODS:
+  - SVProgressHUD (0.9)
+
+DEPENDENCIES:
+  - SVProgressHUD (from `https://github.com/samvermette/SVProgressHUD.git`)
+
+EXTERNAL SOURCES:
+  SVProgressHUD:
+    :git: https://github.com/samvermette/SVProgressHUD.git
+
+SPEC CHECKSUMS:
+  SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
+
+COCOAPODS: 0.23.0

@@ -5,6 +5,7 @@ require 'bundler'
 Bundler.require
 require 'sugarcube-common'
 require 'sugarcube-awesome'
+require 'motion-cocoapods'
 
 require './lib/app_properties'
 props = AppProperties.new
@@ -35,4 +36,9 @@ Motion::Project::App.setup do |app|
 
   # workaround for a RM bug and Bubblewrap, should be solved in the next RM release
   #app.detect_dependencies = false
+
+  # CoaoaPods Dependency Management
+  app.pods do
+    pod 'SVProgressHUD', :git => "https://github.com/samvermette/SVProgressHUD.git"
+  end
 end

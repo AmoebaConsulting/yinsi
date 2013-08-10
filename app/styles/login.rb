@@ -3,6 +3,9 @@ Teacup::Stylesheet.new :login do
 
   v_padding = 10
 
+  #style UIView,
+  #  gradient: { colors: [@green, @green_medium] }
+
   style :root,
     backgroundColor: @green_medium
 
@@ -37,16 +40,15 @@ Teacup::Stylesheet.new :login do
     secure: true
 
   style :big_button,
-    backgroundColor: @grey_dark,
+    backgroundColor: @grey,
     titleColor: @white
 
-  style :login, extends: :big_button,
+  style :login_button, extends: :big_button,
     height: 60,
     title: "Login",
     font: :bold.uifont(24)
 
-  style :register, extends: :big_button,
-    backgroundColor: @grey,
+  style :register_button, extends: :big_button,
     height: 40,
     title: "Register",
     font: :bold.uifont(16)

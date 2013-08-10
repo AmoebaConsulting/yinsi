@@ -8,7 +8,7 @@ class LoginController < UIViewController
     @username = subview(UITextField, :username, delegate: self)
     @password = subview(UITextField, :password, delegate: self)
     @login_button = subview(UIButton, :login_button)
-    @register_button = subview(UIButton.custom, :register_button)
+    @register_button = subview(UIButton, :register_button)
 
     auto do
       metrics 'margin' => 20
@@ -26,6 +26,10 @@ class LoginController < UIViewController
     self.view.stylename = :root
     animate_text_field(@username)
     animate_text_field(@password)
+    @login_button.on(:touch) { login }
+    @register_button.on(:touch) do
+      self.presentModalViewController(RegistrationController.controller, animated: true)
+    end
   end
 
   # Delegate method for text fields exiting focus
@@ -35,14 +39,21 @@ class LoginController < UIViewController
         text_field.resignFirstResponder
         @password.becomeFirstResponder
       else
-        dismiss
+        login
     end
 
   end
 
-  def dismiss
-    RootController.controller.dismissModalViewControllerAnimated(true)
+  def login
+    dismiss
   end
 
+  def dismiss
+    @login_button.off(:all)
+    self.presentingViewController.dismissModalViewControllerAnimated(true)
+  end
 
+  def self.controller
+    @controller ||= LoginController.alloc.init
+  end
 end

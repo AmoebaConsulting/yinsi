@@ -29,8 +29,7 @@ class AppDelegate
   end
 
   def showLoginController
-    @loginController = LoginController.alloc.initWithNibName(nil, bundle: nil)
-    @myRootController.presentModalViewController(@loginController, animated: true)
+    @myRootController.presentModalViewController(LoginController.controller, animated: true)
 
     puts "NOT LOGGED IN"
   end

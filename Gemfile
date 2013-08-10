@@ -55,3 +55,8 @@ gem "awesome_print_motion",   "0.1.0"
 # Lets us use the cocoapods ObjC dependency manager
 #
 gem "motion-cocoapods", "~> 1.3.5"
+
+# Neat gem for creating forms on iOS
+# http://clayallsopp.github.io/formotion/
+#
+gem "formotion", "~> 1.4.0"

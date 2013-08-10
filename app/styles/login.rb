@@ -28,7 +28,10 @@ Teacup::Stylesheet.new :login do
     textAlignment: :center,
     textColor: @white,
     placeholderColor: @white.colorWithAlphaComponent(0.5),
-    placeholderFont: :italic.uifont(30)
+    placeholderFont: :italic.uifont(30),
+    layer: {
+      cornerRadius: 5
+    }
 
   style :username, extends: :big_input,
     placeholder: "Username",
@@ -41,7 +44,10 @@ Teacup::Stylesheet.new :login do
 
   style :big_button,
     backgroundColor: @grey,
-    titleColor: @white
+    titleColor: @white,
+    layer: {
+      cornerRadius: 2
+    }
 
   style :login_button, extends: :big_button,
     height: 60,
@@ -50,7 +56,7 @@ Teacup::Stylesheet.new :login do
 
   style :register_button, extends: :big_button,
     height: 40,
-    title: "Register",
+    title: "No Account? Register",
     font: :bold.uifont(16)
 
 end

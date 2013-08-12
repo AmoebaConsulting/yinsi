@@ -19,7 +19,7 @@ class RegistrationController < Formotion::FormController
   API_REGISTER_ENDPOINT = "http://localhost:3000/api/v1/users.json"
 
   def init
-    form = Formotion::Form.new({
+    @form = Formotion::Form.new({
       sections: [{
         rows: [
           {
@@ -66,7 +66,7 @@ class RegistrationController < Formotion::FormController
       }] #Sections
     })
 
-    form.on_submit do
+    @form.on_submit do
       self.register
     end
     super.initWithForm(form)
@@ -85,48 +85,57 @@ class RegistrationController < Formotion::FormController
 
   def viewDidLoad
     super
-    self.title = "Register"
   end
 
   def register
+    fields = @form.render
     headers = { 'Content-Type' => 'application/json' }
     data = BW::JSON.generate({ user: {
-      email: form.render[:email],
-      name: form.render[:name],
-      password: form.render[:password],
-      password_confirmation: form.render[:password_confirmation]
+      email: fields[:email],
+      name: fields[:name],
+      password: fields[:password],
+      password_confirmation: fields[:password_confirmation]
     } })
 
-    if form.render[:email].nil? ||
-      form.render[:name].nil? ||
-      form.render[:password].nil? ||
-      form.render[:password_confirmation].nil?
-      App.alert("Please complete all the fields")
-    else
-      if form.render[:password] != form.render[:password_confirmation]
-        App.alert("Your password doesn't match confirmation, check again")
+    if fields[:name].empty? ||
+      fields[:password].empty? ||
+      fields[:password_confirmation].empty?
+      App.alert("Please complete all the required fields")
+      return
+    end
+
+    if fields[:password] != fields[:password_confirmation]
+      App.alert("Your password doesn't match confirmation, try again")
+      return
+    end
+
+    SVProgressHUD.showWithStatus("Registering new account...", maskType:SVProgressHUDMaskTypeGradient)
+
+    BW::HTTP.post(API_REGISTER_ENDPOINT, { headers: headers , payload: data } ) do |response|
+      if response.status_description.nil?
+        App.alert(response.error_message)
       else
-        SVProgressHUD.showWithStatus("Registering new account...", maskType:SVProgressHUDMaskTypeGradient)
-        BW::HTTP.post(API_REGISTER_ENDPOINT, { headers: headers , payload: data } ) do |response|
-          if response.status_description.nil?
-            App.alert(response.error_message)
-          else
-            if response.ok?
-              json = BW::JSON.parse(response.body.to_str)
-              App::Persistence['authToken'] = json['data']['auth_token']
-              App.alert(json['info'])
-              self.navigationController.dismissModalViewControllerAnimated(true)
-              TasksListController.controller.refresh
-            elsif response.status_code.to_s =~ /40\d/
-              App.alert("Registration failed")
-            else
-              App.alert(response.to_str)
-            end
-          end
-          SVProgressHUD.dismiss
+        json = parse_json(response.body)
+
+        if response.ok? && json
+          App::Persistence['authToken'] = json['data']['auth_token']
+          App.alert(json['info']) # Testing
+          self.dismiss
+        elsif response.status_code == 406 # Username is taken (or otherwise invalid)
+          info = "(unknown)"
+          info = json['info'] if json
+          App.alert(info)
+        elsif response.status_code == 422
+          info = "(unknown)"
+          info = json['info'] if json
+          App.alert("Server Error: #{info}.")
+        else
+          App.alert("Registration failed! Try again.")
         end
       end
+      SVProgressHUD.dismiss
     end
+
   end
 
   def dismiss
@@ -135,5 +144,16 @@ class RegistrationController < Formotion::FormController
 
   def self.controller
     @controller ||= RegistrationController.alloc.init
+  end
+
+  private
+
+  def parse_json(json_str)
+    begin
+      return BW::JSON.parse(json_str.to_str)
+    rescue
+      App.alert("Error decoding data from server. Try again.")
+      return false
+    end
   end
 end

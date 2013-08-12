@@ -60,7 +60,7 @@ class RegistrationController < Formotion::FormController
         rows: [
           {
             title: "Register",
-            type: :submit,
+            type: :yinsi_button
           }
         ]
       }] #Sections
@@ -73,23 +73,18 @@ class RegistrationController < Formotion::FormController
   end
 
   def layoutDidLoad
-    self.view.stylename = :root
+    self.view.setBackgroundColor(stylesheet_var(:green_medium))
     self.tableView.backgroundView = nil
-    UILabel.appearanceWhenContainedIn(UITableViewHeaderFooterView, nil)
-      .setTextColor(stylesheet_var(:grey)).setShadowColor(UIColor.clearColor)
-      #.setFont(UIFont.systemFontOfSize(20))
 
+    UILabel.appearanceWhenContainedIn(UITableViewHeaderFooterView, RegistrationController, nil)
+      .setTextColor(stylesheet_var(:grey_dark)).setShadowColor(UIColor.clearColor)
+
+    UITableViewCell.appearanceWhenContainedIn(RegistrationController, nil)
+      .setTextColor(stylesheet_var(:grey_dark))
   end
 
   def viewDidLoad
     super
-    #Teacup::Appearance.new do
-    #  style UILabel, when_contained_in: UITableViewHeaderFooterView,
-    #        font: UIFont.systemFontOfSize(12),
-    #        textColor: UIColor.whiteColor,
-    #        shadowColor: UIColor.clearColor
-    #end
-    #Teacup::Appearance.apply # Load in Teacup's "appearance" classes
     self.title = "Register"
   end
 

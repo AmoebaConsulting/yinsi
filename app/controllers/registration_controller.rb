@@ -1,22 +1,11 @@
-module Formotion
-  class Form < Formotion::Base
-    def tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
-      #cell.backgroundView = UIView.alloc.initWithFrame(cell.bounds)
-      cell.stylename = :table_cell
-    end
-
-    def tableView(tableView, willDisplayHeaderView: header, forSection: section)
-      header.stylename = :table_header
-    end
-  end
-end
-
 class RegistrationController < Formotion::FormController
   include YinsiHelpers
 
   stylesheet :registration
 
   def init
+    select_style = :none
+
     @form = Formotion::Form.new({
       sections: [{
         rows: [
@@ -26,19 +15,22 @@ class RegistrationController < Formotion::FormController
             placeholder: "choose a name",
             type: :string,
             auto_correction: :no,
-            auto_capitalization: :none
+            auto_capitalization: :none,
+            selection_style: select_style
           }, {
             title: "Password",
             key: :password,
             placeholder: "required",
             type: :string,
-            secure: true
+            secure: true,
+            selection_style: select_style
           }, {
             title: "Confirm Password",
             key: :password_confirmation,
             placeholder: "required",
             type: :string,
-            secure: true
+            secure: true,
+            selection_style: select_style
           }
         ],
       }, {
@@ -50,7 +42,8 @@ class RegistrationController < Formotion::FormController
             placeholder: "optional",
             type: :email,
             auto_correction: :no,
-            auto_capitalization: :none
+            auto_capitalization: :none,
+            selection_style: select_style
           }
         ]
       }, {

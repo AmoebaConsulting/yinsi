@@ -18,4 +18,10 @@ module YinsiHelpers
     end
   end
   module_function :parse_json
+
+  def api_headers(others = {})
+    headers = { 'Content-Type' => 'application/json' }
+    headers.merge(others)
+  end
+  module_function :api_headers
 end

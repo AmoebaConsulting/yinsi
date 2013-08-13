@@ -45,8 +45,10 @@ class LoginController < UIViewController
   end
 
   def login
-
-    dismiss
+    fields = { name: @username.text, password: @password.text }
+    User.login(fields) do
+      dismiss
+    end
   end
 
   def dismiss

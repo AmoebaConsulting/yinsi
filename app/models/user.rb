@@ -23,10 +23,10 @@ class User
 
   has_many    :buddies, :dependent => :destroy
 
-  API_REGISTER_ENDPOINT = "http://localhost:3000/api/v1/users.json"
+  API_REGISTER_ENDPOINT = "API".info_plist + "/api/v1/users.json"
+  API_LOGIN_ENDPOINT = "API".info_plist + "/api/v1/users/sessions.json"
 
   def self.register(fields, &block)
-    headers = { 'Content-Type' => 'application/json' }
     data = BW::JSON.generate({ user: {
       email: fields[:email],
       name: fields[:name],
@@ -36,7 +36,7 @@ class User
 
     SVProgressHUD.showWithStatus("Registering new account...", maskType:SVProgressHUDMaskTypeGradient)
 
-    BW::HTTP.post(API_REGISTER_ENDPOINT, { headers: headers , payload: data } ) do |response|
+    BW::HTTP.post(API_REGISTER_ENDPOINT, { headers: YinsiHelpers.api_headers , payload: data } ) do |response|
       SVProgressHUD.dismiss
       if response.status_description.nil?
         App.alert(response.error_message)
@@ -45,13 +45,7 @@ class User
 
         if response.ok? && json
           # Build a user object and save it
-          User.delete_all
-          User.new name:  json['data']['user']['name'],
-                   email: json['data']['user']['email'],
-                   created_at: json['data']['user']['created_at'],
-                   updated_at: json['data']['user']['updated_at'],
-                   auth_token: json['data']['auth_token']
-
+          build_and_save_user_from_json(json)
           block.call(json)
         elsif response.status_code == 406 || response.status_code == 409
           # 406: Username is taken (or otherwise invalid)
@@ -68,6 +62,45 @@ class User
         end
       end
     end
+  end
+
+  def self.login(fields, &block)
+    data = BW::JSON.generate({ user: {
+      name: fields[:name],
+      password: fields[:password]
+    } })
+
+    SVProgressHUD.showWithStatus("Logging in...", maskType:SVProgressHUDMaskTypeGradient)
+    BW::HTTP.post(API_LOGIN_ENDPOINT, { headers: YinsiHelpers.api_headers , payload: data } ) do |response|
+      puts "Response: #{response}."
+      if response.status_description.nil?
+        App.alert(response.error_message)
+      else
+        json = YinsiHelpers.parse_json(response.body)
+        if response.ok? && json
+          build_and_save_user_from_json(json)
+          block.call(json)
+        elsif response.status_code.to_s =~ /40\d/
+          info = "Login Failed"
+          info = json['info'] if json && json.include?('info')
+          App.alert(info)
+        else
+          App.alert(response.to_str)
+        end
+      end
+      SVProgressHUD.dismiss
+    end
+  end
+
+  def self.build_and_save_user_from_json(json)
+    User.delete_all
+    u = User.new name:  json['data']['user']['name'],
+             email: json['data']['user']['email'],
+             created_at: json['data']['user']['created_at'],
+             updated_at: json['data']['user']['updated_at'],
+             auth_token: json['data']['auth_token']
+    u.save(:validate => false)
+    u
   end
 
 end

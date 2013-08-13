@@ -22,12 +22,17 @@ Motion::Project::App.setup do |app|
   app.device_family = props.devices
   #app.icons = props.icons
   #app.provisioning_profile = props.provisioning
+
   app.release do
     app.codesign_certificate = props.distribution_certificate
+    app.info_plist['API'] = "http://api.yinsi.mobi"
   end
-  # app.development do
-  #   app.codesign_certificate = props.developer_certificate
-  # end
+
+  app.development do
+    # app.codesign_certificate = props.developer_certificate
+    app.info_plist['API'] = "http://localhost:3000"
+  end
+
   # include external files
   app.files += props.render_files(app)
 

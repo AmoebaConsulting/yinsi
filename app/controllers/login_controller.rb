@@ -45,6 +45,7 @@ class LoginController < UIViewController
   end
 
   def login
+
     dismiss
   end
 

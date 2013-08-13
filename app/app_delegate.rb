@@ -16,7 +16,7 @@ class AppDelegate
     @window.makeKeyAndVisible
 
     # If we aint logged in
-    if App::Persistence['authToken'].nil?
+    if User.count == 0
       App.run_after(0.1) do
         showLoginController
       end
@@ -30,8 +30,6 @@ class AppDelegate
 
   def showLoginController
     @myRootController.presentModalViewController(LoginController.controller, animated: true)
-
-    puts "NOT LOGGED IN"
   end
 
 end

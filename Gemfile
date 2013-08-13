@@ -60,3 +60,7 @@ gem "motion-cocoapods", "~> 1.3.5"
 # http://clayallsopp.github.io/formotion/
 #
 gem "formotion", "~> 1.4.0"
+
+# Models models models!
+# https://github.com/sxross/MotionModel/
+gem "motion_model", "~> 0.4.6"

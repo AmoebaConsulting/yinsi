@@ -15,7 +15,6 @@ class RegistrationController < Formotion::FormController
   include YinsiHelpers
 
   stylesheet :registration
-
   API_REGISTER_ENDPOINT = "http://localhost:3000/api/v1/users.json"
 
   def init
@@ -56,7 +55,6 @@ class RegistrationController < Formotion::FormController
           }
         ]
       }, {
-        #title: "By clicking Register you are indicating that you have read and agreed to the terms of service",
         rows: [
           {
             title: "Register",
@@ -89,13 +87,6 @@ class RegistrationController < Formotion::FormController
 
   def register
     fields = @form.render
-    headers = { 'Content-Type' => 'application/json' }
-    data = BW::JSON.generate({ user: {
-      email: fields[:email],
-      name: fields[:name],
-      password: fields[:password],
-      password_confirmation: fields[:password_confirmation]
-    } })
 
     if fields[:name].empty? ||
       fields[:password].empty? ||
@@ -109,33 +100,15 @@ class RegistrationController < Formotion::FormController
       return
     end
 
-    SVProgressHUD.showWithStatus("Registering new account...", maskType:SVProgressHUDMaskTypeGradient)
-
-    BW::HTTP.post(API_REGISTER_ENDPOINT, { headers: headers , payload: data } ) do |response|
-      if response.status_description.nil?
-        App.alert(response.error_message)
-      else
-        json = parse_json(response.body)
-
-        if response.ok? && json
-          App::Persistence['authToken'] = json['data']['auth_token']
-          App.alert(json['info']) # Testing
-          self.dismiss
-        elsif response.status_code == 406 # Username is taken (or otherwise invalid)
-          info = "(unknown)"
-          info = json['info'] if json
-          App.alert(info)
-        elsif response.status_code == 422
-          info = "(unknown)"
-          info = json['info'] if json
-          App.alert("Server Error: #{info}.")
-        else
-          App.alert("Registration failed! Try again.")
-        end
-      end
-      SVProgressHUD.dismiss
+    if !fields[:password].length.between?(8, 128)
+      App.alert("Your password must be greater than 8 characters")
+      return
     end
 
+    User.register(fields) do
+      # Dismiss the login & registration if it's successful
+      self.presentingViewController.dismiss
+    end
   end
 
   def dismiss
@@ -146,14 +119,4 @@ class RegistrationController < Formotion::FormController
     @controller ||= RegistrationController.alloc.init
   end
 
-  private
-
-  def parse_json(json_str)
-    begin
-      return BW::JSON.parse(json_str.to_str)
-    rescue
-      App.alert("Error decoding data from server. Try again.")
-      return false
-    end
-  end
 end

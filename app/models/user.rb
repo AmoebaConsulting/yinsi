@@ -72,7 +72,6 @@ class User
 
     SVProgressHUD.showWithStatus("Logging in...", maskType:SVProgressHUDMaskTypeGradient)
     BW::HTTP.post(API_LOGIN_ENDPOINT, { headers: YinsiHelpers.api_headers , payload: data } ) do |response|
-      puts "Response: #{response}."
       if response.status_description.nil?
         App.alert(response.error_message)
       else

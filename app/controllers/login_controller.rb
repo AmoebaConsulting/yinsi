@@ -30,6 +30,7 @@ class LoginController < UIViewController
     @register_button.on(:touch) do
       self.presentModalViewController(RegistrationController.controller, animated: true)
     end
+    self.view.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(self, action: 'dismissKeyboard'))
   end
 
   # Delegate method for text fields exiting focus
@@ -54,6 +55,10 @@ class LoginController < UIViewController
   def dismiss
     @login_button.off(:all)
     self.presentingViewController.dismissModalViewControllerAnimated(true)
+  end
+
+  def dismissKeyboard
+    self.view.endEditing(true)
   end
 
   def self.controller

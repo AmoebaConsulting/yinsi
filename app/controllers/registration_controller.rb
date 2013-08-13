@@ -15,7 +15,6 @@ class RegistrationController < Formotion::FormController
   include YinsiHelpers
 
   stylesheet :registration
-  API_REGISTER_ENDPOINT = "http://localhost:3000/api/v1/users.json"
 
   def init
     @form = Formotion::Form.new({
@@ -58,11 +57,30 @@ class RegistrationController < Formotion::FormController
         rows: [
           {
             title: "Register",
-            type: :yinsi_button
+            type: :yinsi_button,
+            value: {backgroundColor: stylesheet_var(:grey_dark)}
           }
         ]
+      }, {
+        rows: [
+          {
+            title: "Cancel",
+            type: :yinsi_button,
+            value: {backgroundColor: stylesheet_var(:green_medium)}
+          }
+        ]
+
       }] #Sections
     })
+
+    @form.sections[2].rows[0].on_tap do |row| # Submit button
+      @form.submit
+    end
+
+    @form.sections[3].rows[0].on_tap do |row| # Cancel button
+      @form.reset
+      self.dismiss
+    end
 
     @form.on_submit do
       self.register

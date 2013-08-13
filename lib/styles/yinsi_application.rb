@@ -3,6 +3,7 @@ Teacup::Stylesheet.new :yinsi_application do
   @green_medium = "#89BB00".to_color
   @green_ultra_light = "#E6F9B2".to_color
   @green_light = "#D1F963".to_color
+  @green_dark = "#5F7C1E".to_color
 
   @grey = "#424C4D".to_color
   @grey_dark = "#333B3D".to_color

@@ -6,7 +6,11 @@ class AppDelegate < PM::Delegate
   include YinsiHelpers
 
   def on_load(app, options)
-    open_tab_bar HomeScreen, HomeScreen
+    # Adding Motion-Xray's UIWindow shim
+    #  #self.window = Motion::Xray::XrayWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+
+    open_tab_bar HomeScreen
+    #open_tab 0
 
     UITabBar.appearance.backgroundImage = Graphics::color_image(stylesheet_var(:grey_dark), App.window.rootViewController.tabBar.bounds)
 
@@ -15,6 +19,11 @@ class AppDelegate < PM::Delegate
     #                                                #UITextAttributeTextShadowColor => UIColor.colorWithWhite(0.0, alpha:0.4),
     #                                                UITextAttributeTextColor => UIColor.whiteColor
     #                                              }, forState: UIControlStateNormal)
+
+
+    # include the SaveUIPlugin, which is not included by default
+    #  #Motion::Xray.register(Motion::Xray::SaveUIPlugin.new)
+
   end
 
 
@@ -32,15 +41,8 @@ class AppDelegate < PM::Delegate
   #  @window.rootViewController = @tabController
   #  @window.makeKeyAndVisible
   #
-  #  # If we aint logged in
-  #  if User.count == 0
-  #    App.run_after(0.1) do
-  #      showLoginController
-  #    end
-  #  end
   #
-  #  # include the SaveUIPlugin, which is not included by default
-  #  #Motion::Xray.register(Motion::Xray::SaveUIPlugin.new)
+  #
   #
   #  true
   #end

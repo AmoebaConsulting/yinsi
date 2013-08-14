@@ -17,7 +17,9 @@ module ProMotion
       super
 
       # Style the TabBar
-      UITabBar.appearanceWhenContainedIn(TabBarController, nil).setBackgroundImage(color_image(stylesheet_var(:grey_dark), self.tabBar.bounds))
+      UITabBar.appearanceWhenContainedIn(TabBarController, nil)
+        .setBackgroundImage(color_image(stylesheet_var(:grey_dark), self.tabBar.bounds))
+        .setSelectedImageTintColor(stylesheet_var(:green_medium))
     end
 
   end

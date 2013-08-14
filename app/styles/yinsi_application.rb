@@ -33,10 +33,13 @@ Teacup::Stylesheet.new :yinsi_application do
     }
 
   style :big_button,
-    backgroundColor: @grey,
+    buttonColor: @grey,
+    shadowColor: @grey_dark,
+    shadowHeight: 3.0,
     titleColor: @white,
-    layer: {
-      cornerRadius: 2
-    }
+    cornerRadius: 6.0
+    #layer: {
+    #  cornerRadius: 2
+    #}
 
 end

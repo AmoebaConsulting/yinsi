@@ -5,15 +5,11 @@ module Formotion
         true
       end
 
-      #def on_select(tableView, tableViewDelegate)
-      #  tableViewDelegate.submit
-      #end
-
       def build_cell(cell)
         cell.selectionStyle = UITableViewCellSelectionStyleNone
         cell.backgroundView = UIView.alloc.initWithFrame(cell.bounds)
         cell.backgroundView.backgroundColor = row.value[:backgroundColor]
-        cell.backgroundView.layer.cornerRadius = 2
+        cell.backgroundView.layer.cornerRadius = 6
 
         cell.swizzle(:layoutSubviews) do
           def layoutSubviews

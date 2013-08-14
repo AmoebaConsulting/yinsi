@@ -11,8 +11,8 @@ class LoginScreen < PM::Screen
       @label = subview(UILabel, :title)
       @username = subview(UITextField, :username, delegate: self)
       @password = subview(UITextField, :password, delegate: self)
-      @login_button = subview(UIButton, :login_button)
-      @register_button = subview(UIButton, :register_button)
+      @login_button = subview(FUIButton, :login_button)
+      @register_button = subview(FUIButton, :register_button)
 
       auto do
         metrics 'margin' => 20

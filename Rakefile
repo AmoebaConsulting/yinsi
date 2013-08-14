@@ -46,5 +46,6 @@ Motion::Project::App.setup do |app|
   app.pods do
     pod 'SVProgressHUD', :git => "https://github.com/samvermette/SVProgressHUD.git"
     pod 'FontAwesomeKit'
+    pod 'FlatUIKit'
   end
 end

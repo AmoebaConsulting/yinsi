@@ -34,11 +34,13 @@ class LoginScreen < PM::Screen
     animate_text_field(@username)
     animate_text_field(@password)
 
+    dismiss_keyboard_on_tap
+
     @login_button.on(:touch) { login }
     @register_button.on(:touch) do
       self.open_modal(RegistrationScreen)
     end
-    self.view.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(self, action: 'dismissKeyboard'))
+
   end
 
   # Delegate method for text fields exiting focus

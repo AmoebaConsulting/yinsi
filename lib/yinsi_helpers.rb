@@ -41,5 +41,9 @@ module YinsiHelpers
     end
   end
 
+  def dismiss_keyboard_on_tap
+    self.view.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(self, action: 'dismissKeyboard'))
+  end
+
   extend ClassMethods
 end

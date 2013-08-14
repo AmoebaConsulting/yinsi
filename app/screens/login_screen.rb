@@ -4,11 +4,6 @@ class LoginScreen < PM::Screen
 
   stylesheet :login
 
-  # will_appear runs every time the view appears
-  def will_appear
-
-  end
-
   # on_load runs once, during the creation of the view
   def on_load
     layout (self.view, :root) do

@@ -9,7 +9,7 @@ class AppDelegate < PM::Delegate
     # Adding Motion-Xray's UIWindow shim
     #  #self.window = Motion::Xray::XrayWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
 
-    open_tab_bar CallScreen#, BuddyScreen, SettingsScreen
+    open_tab_bar CallScreen, BuddyScreen, SettingsScreen
     #open_tab 0
 
     # include the SaveUIPlugin, which is not included by default

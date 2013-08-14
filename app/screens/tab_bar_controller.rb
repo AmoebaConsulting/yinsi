@@ -1,6 +1,8 @@
 module ProMotion
   class TabBarController < UITabBarController
     include ProMotion::ScreenNavigation
+    include YinsiHelpers
+    include Graphics
 
     def viewDidAppear(animated)
       super
@@ -14,17 +16,9 @@ module ProMotion
     def viewDidLoad
       super
 
-      #image = Graphics::color_image(UIColor.whiteColor, tabBar.bounds)
-      #tabBar.backgroundImage = image
-
-      #image = Graphics::color_image(UIColor.whiteColor, self.view.bounds)
-      #self.view.addSubview(image)
-
-      #puts "Tab bar items: #{tabBar.items}"
-
-      #tabBar.items.each do |item|
-
-      #end
+      # Style the TabBar
+      UITabBar.appearanceWhenContainedIn(TabBarController, nil).setBackgroundImage(color_image(stylesheet_var(:grey_dark), self.tabBar.bounds))
     end
+
   end
 end

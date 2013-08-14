@@ -19,6 +19,10 @@ module Graphics
     image
   end
 
+  def view_from_image(image)
+    UIImageView.alloc.initWithImage(image)
+  end
+
   def gradient_layer_with_top(top_color, bottom_color, frame)
     layer = CAGradientLayer.layer
     layer.frame = frame

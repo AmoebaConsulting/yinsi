@@ -1,12 +1,13 @@
-class RegistrationController < Formotion::FormController
+class RegistrationScreen < PM::FormotionScreen
   include YinsiHelpers
+  include Graphics
 
   stylesheet :registration
 
-  def init
+  def table_data
     select_style = :none
 
-    @form = Formotion::Form.new({
+    {
       sections: [{
         rows: [
           {
@@ -64,36 +65,31 @@ class RegistrationController < Formotion::FormController
         ]
 
       }] #Sections
-    })
+    }
+  end
 
-    @form.sections[2].rows[0].on_tap do |row| # Submit button
-      @form.submit
+  def on_load
+    self.form.sections[2].rows[0].on_tap do |row| # Submit button
+      self.form.submit
     end
 
-    @form.sections[3].rows[0].on_tap do |row| # Cancel button
-      @form.reset
+    self.form.sections[3].rows[0].on_tap do |row| # Cancel button
+      self.form.reset
       self.dismiss
     end
 
-    @form.on_submit do
+    self.form.on_submit do
       self.register
     end
-    super.initWithForm(form)
-  end
 
-  def layoutDidLoad
-    self.view.setBackgroundColor(stylesheet_var(:green_medium))
-    self.tableView.backgroundView = nil
+    UITableView.appearanceWhenContainedIn(RegistrationScreen, nil)
+    .setBackgroundView(view_from_image(color_image(stylesheet_var(:green_medium), self.view.backgroundView.frame)))
 
-    UILabel.appearanceWhenContainedIn(UITableViewHeaderFooterView, RegistrationController, nil)
-      .setTextColor(stylesheet_var(:grey_dark)).setShadowColor(UIColor.clearColor)
+    UILabel.appearanceWhenContainedIn(UITableViewHeaderFooterView, RegistrationScreen, nil)
+    .setTextColor(stylesheet_var(:grey_dark)).setShadowColor(UIColor.clearColor)
 
-    UITableViewCell.appearanceWhenContainedIn(RegistrationController, nil)
-      .setTextColor(stylesheet_var(:grey_dark))
-  end
-
-  def viewDidLoad
-    super
+    UITableViewCell.appearanceWhenContainedIn(RegistrationScreen, nil)
+    .setTextColor(stylesheet_var(:grey_dark))
   end
 
   def register
@@ -124,10 +120,6 @@ class RegistrationController < Formotion::FormController
 
   def dismiss
     self.presentingViewController.dismissModalViewControllerAnimated(true)
-  end
-
-  def self.controller
-    @controller ||= RegistrationController.alloc.init
   end
 
 end

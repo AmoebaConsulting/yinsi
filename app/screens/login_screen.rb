@@ -36,7 +36,7 @@ class LoginScreen < PM::Screen
 
     @login_button.on(:touch) { login }
     @register_button.on(:touch) do
-      self.presentModalViewController(RegistrationController.controller, animated: true)
+      self.open_modal(RegistrationScreen)
     end
     self.view.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(self, action: 'dismissKeyboard'))
   end

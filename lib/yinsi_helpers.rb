@@ -9,6 +9,12 @@ module YinsiHelpers
   module ClassMethods
     # Lookup a variable from the main application teacup stylehseet
     def stylesheet_var(name)
+      # We need to hit a fake query to Teacup::Stylesheet to ensure it has parsed it, or
+      # it's possible that it has not yet been loaded.
+      @query_completed ||= begin
+        Teacup::Stylesheet[:yinsi_application].query(:dummy)
+        true
+      end
       Teacup::Stylesheet[:yinsi_application].instance_variable_get("@#{name.to_s}".to_sym)
     end
 

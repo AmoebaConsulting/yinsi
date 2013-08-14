@@ -23,3 +23,7 @@ resources/Icon-Small-50@2x.png
 resources/Icon-Small@2x.png
 resources/Icon.png
 resources/Icon@2x.png
+
+# Cocoapods Ignores
+vendor/Pods
+vendor/Podfile.lock

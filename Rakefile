@@ -45,5 +45,6 @@ Motion::Project::App.setup do |app|
   # CoaoaPods Dependency Management
   app.pods do
     pod 'SVProgressHUD', :git => "https://github.com/samvermette/SVProgressHUD.git"
+    pod 'FontAwesomeKit'
   end
 end

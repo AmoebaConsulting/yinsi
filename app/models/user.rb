@@ -92,7 +92,7 @@ class User
   end
 
   def self.build_and_save_user_from_json(json)
-    User.delete_all
+    User.destroy_all
     u = User.new name:  json['data']['user']['name'],
              email: json['data']['user']['email'],
              created_at: json['data']['user']['created_at'],

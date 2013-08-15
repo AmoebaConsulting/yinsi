@@ -24,7 +24,7 @@ module ProMotion
 
     def logout
       unless self.modalViewController.class == LoginScreen
-        User.delete_all
+        User.destroy_all
         self.open_modal(LoginScreen)
       end
     end

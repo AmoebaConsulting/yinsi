@@ -71,4 +71,4 @@ gem "motion_model", "~> 0.4.6"
 # Note: Currently using our fork of it until our patches are merged back upstream.
 # Switch back to >=1.0.3 once pull requests are merged in.
 #
-gem "ProMotion", :github => "AmoebaConsulting/ProMotion", :branch => "yinsi"
+gem "ProMotion", :path => "~/workspace/ProMotion" #:github => "AmoebaConsulting/ProMotion", :branch => "yinsi"

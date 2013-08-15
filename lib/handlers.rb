@@ -30,7 +30,3 @@ Teacup.handler UITextField, :placeholderFont do |text_field, font|
   text_field.setValue(font, forKeyPath: "_placeholderLabel.font")
 end
 
-Teacup.handler UITextField, :placeholderFont do |text_field, font|
-  text_field.setValue(font, forKeyPath: "_placeholderLabel.font")
-end
-

@@ -23,6 +23,8 @@ Motion::Project::App.setup do |app|
   #app.icons = props.icons
   #app.provisioning_profile = props.provisioning
 
+  app.fonts = ['Lato-Regular.ttf', 'Lato-Bold.ttf', 'Lato-Italic.ttf']
+
   app.release do
     app.codesign_certificate = props.distribution_certificate
     app.info_plist['API'] = "http://api.yinsi.mobi"

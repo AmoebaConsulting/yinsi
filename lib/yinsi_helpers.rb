@@ -46,6 +46,10 @@ module YinsiHelpers
                                              'FAKImageAttributeBackgroundColor' => options[:background_color]})
   end
 
+  def dismissKeyboard
+    self.view.endEditing(true)
+  end
+
   def dismiss_keyboard_on_tap
     self.view.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(self, action: 'dismissKeyboard'))
   end

@@ -17,6 +17,7 @@ class BuddyScreen < PM::TableScreen
     self.view.stylename = :root
 
     set_nav_bar_button :right, system_item: :add, action: :add_buddy
+    set_nav_bar_button :back, title: 'Cancel', style: :plain, action: :back
 
     # Style the navigation bar (& buttons in it)
     self.navigationController.navigationBar.configureFlatNavigationBarWithColor(stylesheet_var(:green_medium))

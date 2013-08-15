@@ -1,7 +1,5 @@
-GIT
-  remote: git://github.com/AmoebaConsulting/ProMotion.git
-  revision: 4741e4876064fc95e5f4283c50698d6f1260569b
-  branch: yinsi
+PATH
+  remote: ~/workspace/ProMotion
   specs:
     ProMotion (1.0.3)
 

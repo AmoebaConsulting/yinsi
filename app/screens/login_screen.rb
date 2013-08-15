@@ -62,10 +62,6 @@ class LoginScreen < PM::Screen
     self.presentingViewController.dismissModalViewControllerAnimated(true)
   end
 
-  def dismissKeyboard
-    self.view.endEditing(true)
-  end
-
   def top_level_view
     view
   end

@@ -25,7 +25,6 @@ class Buddy
             end
           end
         elsif response.status_code == 401
-          #App.alert("Session invalid, please login again")
           App.delegate.tab_bar.logout
         else
           App.alert("Unknown error occurred while trying to sync buddy list")

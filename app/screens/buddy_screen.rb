@@ -78,10 +78,8 @@ class BuddyScreen < PM::TableScreen
   end
 
   def on_refresh
-    Buddy.download_all do
-      download_table_data
-      end_refreshing
-    end
+    download_table_data
+    end_refreshing
   end
 
   def select_buddy(args)

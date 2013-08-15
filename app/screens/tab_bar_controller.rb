@@ -9,7 +9,7 @@ module ProMotion
 
       # Check to see if we are logged in, and if not present the login screen modal
       if !current_user
-        self.open_modal(LoginScreen)
+        logout
       end
     end
 
@@ -23,8 +23,7 @@ module ProMotion
     end
 
     def logout
-      # Wait half a second and hope any transitions are done that may have been going
-      App.run_after(0.5) do
+      unless self.modalViewController.class == LoginScreen
         User.delete_all
         self.open_modal(LoginScreen)
       end

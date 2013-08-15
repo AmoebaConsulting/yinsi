@@ -4,7 +4,7 @@ class SettingsScreen < PM::Screen
   stylesheet :settings
 
   def on_init
-    set_tab_bar_item icon: font_awesome_tab_icon(:cog), title: "Settings"
+    set_tab_icon(:cog, "Settings")
     self.view.stylename = :root
   end
 end

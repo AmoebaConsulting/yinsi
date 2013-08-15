@@ -4,7 +4,8 @@ class CallScreen < PM::Screen
   stylesheet :call
 
   def on_init
-    set_tab_bar_item icon: font_awesome_tab_icon(:phone), title: "Call"
+    set_tab_icon(:phone, "Call")
+
     self.view.stylename = :root
   end
 end

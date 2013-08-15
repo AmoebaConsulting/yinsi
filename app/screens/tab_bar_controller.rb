@@ -9,7 +9,7 @@ module ProMotion
 
       # Check to see if we are logged in, and if not present the login screen modal
       if User.count == 0
-        self.open_modal(LoginScreen)
+        #self.open_modal(LoginScreen)
       end
     end
 

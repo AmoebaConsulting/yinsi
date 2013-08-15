@@ -9,6 +9,7 @@ Teacup::Stylesheet.new :yinsi_application do
   @grey_dark = "#333B3D".to_color
 
   @white = "#FFFFFF".to_color
+  @clouds = "#ECF0F1".to_color
 
   @back_color = :white
   @dark_color = 0x2a487f.uicolor 

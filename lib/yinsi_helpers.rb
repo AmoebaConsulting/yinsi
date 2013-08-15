@@ -36,13 +36,27 @@ module YinsiHelpers
       headers.merge(others)
     end
 
-    def font_awesome_tab_icon(icon_name)
-      FontAwesomeKit.imageForIcon(FontAwesomeKit.allIcons["FAKIcon#{icon_name.to_s.sub('-','_').camelize.sub('Icon','')}"], imageSize: CGSizeMake(30,30), fontSize: 29, attributes: nil)
+    def font_awesome_tab_icon(icon_name, options = {})
+      options = {
+        color: :black.uicolor,
+        background_color: UIColor.clearColor
+      }.merge(options)
+      FontAwesomeKit.imageForIcon(FontAwesomeKit.allIcons["FAKIcon#{icon_name.to_s.sub('-','_').camelize.sub('Icon','')}"],
+                                  imageSize: CGSizeMake(30,30),
+                                  fontSize: 29,
+                                  attributes: {'FAKImageAttributeForegroundColor' => options[:color],
+                                               'FAKImageAttributeBackgroundColor' => options[:background_color]})
     end
-  end
 
-  def dismiss_keyboard_on_tap
-    self.view.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(self, action: 'dismissKeyboard'))
+    def dismiss_keyboard_on_tap
+      self.view.addGestureRecognizer(UITapGestureRecognizer.alloc.initWithTarget(self, action: 'dismissKeyboard'))
+    end
+
+    def set_tab_icon(icon_name, title)
+      icon = font_awesome_tab_icon(icon_name, color: stylesheet_var(:clouds))
+      self.set_tab_bar_item icon: {selected: icon, unselected: icon}, title: title
+    end
+
   end
 
   extend ClassMethods

@@ -57,7 +57,7 @@ class BuddyScreen < PM::TableScreen
   end
 
   def add_buddy
-    puts "next!"
+    open BuddyAddScreen, in_tab: "Buddies"
   end
 
   def on_refresh
@@ -68,5 +68,9 @@ class BuddyScreen < PM::TableScreen
     #  end_refreshing
     #  update_table_data
     #end
+  end
+
+  def on_return
+    puts "Back from add"
   end
 end

@@ -62,8 +62,12 @@ class BuddyScreen < PM::TableScreen
   end
 
   def on_refresh
-    end_refreshing
-    update_table_data
+    Buddy.download_all do
+      #TODO Actually update the table's data
+      end_refreshing
+      update_table_data
+    end
+
     #MyItems.pull_from_server do |items|
     #  @my_items = items
     #  end_refreshing

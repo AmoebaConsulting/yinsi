@@ -17,7 +17,7 @@ module YinsiHelpers
   end
 
   def current_user
-    App::Persistence['current_user']
+    User.first
   end
 
   def parse_json(json_str)
@@ -31,6 +31,11 @@ module YinsiHelpers
 
   def api_headers(others = {})
     headers = { 'Content-Type' => 'application/json' }
+
+    if current_user
+      headers["Authorization"] = "Token token=\"#{current_user.auth_token}\""
+    end
+
     headers.merge(others)
   end
 

@@ -1,5 +1,7 @@
-PATH
-  remote: ~/workspace/ProMotion
+GIT
+  remote: git://github.com/AmoebaConsulting/ProMotion.git
+  revision: 90fbc565c52434c31de2a192b6b654227a526fb8
+  branch: yinsi
   specs:
     ProMotion (1.0.3)
 

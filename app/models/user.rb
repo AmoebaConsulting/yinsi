@@ -46,7 +46,7 @@ class User
         if response.ok? && json
           # Build a user object and save it
           build_and_save_user_from_json(json)
-          block.call(json)
+          block.call(json) if block
         elsif response.status_code == 406 || response.status_code == 409
           # 406: Username is taken (or otherwise invalid)
           # 409: Email address is already in use
@@ -78,7 +78,7 @@ class User
         json = YinsiHelpers.parse_json(response.body)
         if response.ok? && json
           build_and_save_user_from_json(json)
-          block.call(json)
+          block.call(json) if block
         elsif response.status_code.to_s =~ /40\d/
           info = "Login Failed"
           info = json['info'] if json && json.include?('info')

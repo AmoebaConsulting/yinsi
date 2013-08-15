@@ -11,15 +11,13 @@ class Buddy
   API_BUDDIES_ENDPOINT = "API".info_plist + "/api/v1/buddies.json"
 
   def self.download_all(&callback)
-    root_controller = App.window.rootViewController
-
     BW::HTTP.get(API_BUDDIES_ENDPOINT, headers: api_headers ) do |response|
       if response.status_description.nil?
         App.alert(response.error_message)
       else
-        puts "Response: #{response.body}."
         json = parse_json(response.body)
         if response.ok? && json
+          Buddy.delete_all
           if json['data']['buddies_count'] > 0
             json['data']['buddies'].each do |buddy|
               b = Buddy.new name: buddy['name'], created_at: buddy['created_at']
@@ -27,8 +25,8 @@ class Buddy
             end
           end
         elsif response.status_code == 401
-          App.alert("Login expired")
-          root_controller.logout
+          #App.alert("Session invalid, please login again")
+          App.delegate.tab_bar.logout
         else
           App.alert("Unknown error occurred while trying to sync buddy list")
         end

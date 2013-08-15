@@ -28,13 +28,29 @@ class BuddyScreen < PM::TableScreen
     table_view.contentOffset = CGPointMake(0, 44)
   end
 
+  # Looks like this is only fired once, when the view is first presented
+  def will_present
+    download_table_data
+  end
+
   def table_data
-    [{
-       cells: [
-         { title: "Oregon" },
-         { title: "Washington"}
-       ]
-     }]
+    @table_data ||= []
+  end
+
+  def download_table_data
+    Buddy.download_all do
+      @table_data = [{
+                       cells: Buddy.all.map do |buddy|
+                         {
+                           title:         buddy.name,
+                           action:        :select_buddy,
+                           editing_style: :delete,
+                           arguments:     { buddy: buddy }
+                         }
+                       end
+                     }]
+      update_table_data
+    end
   end
 
   def table_data_index
@@ -63,19 +79,21 @@ class BuddyScreen < PM::TableScreen
 
   def on_refresh
     Buddy.download_all do
-      #TODO Actually update the table's data
+      download_table_data
       end_refreshing
-      update_table_data
     end
-
-    #MyItems.pull_from_server do |items|
-    #  @my_items = items
-    #  end_refreshing
-    #  update_table_data
-    #end
   end
 
-  def on_return
-    puts "Back from add"
+  def select_buddy(args)
+    #args.buddy contians what you're looking for
+    #TODO: Implement
+    puts "Buddy selected: #{args[:buddy]}"
+  end
+
+  def on_cell_deleted(cell)
+    #cell[:arguments][:buddy] is interesting...
+    #TODO: Implement
+    puts "Deleting #{cell[:arguments][:buddy]}"
+    return false
   end
 end

@@ -23,8 +23,11 @@ module ProMotion
     end
 
     def logout
-      User.delete_all
-      self.open_modal(LoginScreen)
+      # Wait half a second and hope any transitions are done that may have been going
+      App.run_after(0.5) do
+        User.delete_all
+        self.open_modal(LoginScreen)
+      end
     end
 
   end

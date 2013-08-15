@@ -37,7 +37,7 @@ class BuddyAddScreen < PM::Screen
   end
 
   def back
-    close saved: true # or false
+    close
   end
 
 end

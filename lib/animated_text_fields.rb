@@ -13,8 +13,10 @@ module AnimatedTextFields
   end
 
   def dealloc
-    @animated_text_fields.each do |text_field|
-      text_field.off(:all)
+    if @animated_text_fields
+      @animated_text_fields.each do |text_field|
+        text_field.off(:all)
+      end
     end
     super.dealloc
   end

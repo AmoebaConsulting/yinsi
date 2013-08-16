@@ -1,4 +1,4 @@
-class Buddy
+class Buddy < BaseModel
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
   include YinsiHelpers
@@ -11,26 +11,24 @@ class Buddy
   API_BUDDIES_ENDPOINT = "API".info_plist + "/api/v1/buddies.json"
 
   def self.download_all(&callback)
-    BW::HTTP.get(API_BUDDIES_ENDPOINT, headers: api_headers ) do |response|
-      if response.status_description.nil?
-        App.alert(response.error_message)
-      else
-        json = parse_json(response.body)
-        if response.ok? && json
-          Buddy.delete_all
-          if json['data']['buddies_count'] > 0
-            json['data']['buddies'].each do |buddy|
+    http_query(API_BUDDIES_ENDPOINT) do |q|
+
+      q.response do |res|
+        if res.success?
+          Buddy.destroy_all
+          if res['buddies_count'] > 0
+            res['buddies'].each do |buddy|
               b = Buddy.new name: buddy['name'], created_at: buddy['created_at']
               b.save(:validate => false)
             end
           end
-        elsif response.status_code == 401
-          App.delegate.tab_bar.logout
-        else
-          App.alert("Unknown error occurred while trying to sync buddy list")
         end
+        callback.call(res) if callback
       end
-      callback.call(json) if callback
+
+      q.error(401) do
+        App.delegate.tab_bar.logout
+      end
     end
   end
 

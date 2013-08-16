@@ -52,8 +52,8 @@ class LoginScreen < PM::Screen
 
   def login
     fields = { name: @username.text, password: @password.text }
-    User.login(fields) do
-      dismiss
+    User.login(fields) do |response|
+      dismiss if response.success?
     end
   end
 

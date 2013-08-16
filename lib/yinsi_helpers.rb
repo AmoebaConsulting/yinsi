@@ -16,29 +16,6 @@ module YinsiHelpers
     Teacup::Stylesheet[:yinsi_application].instance_variable_get("@#{name.to_s}".to_sym)
   end
 
-  def current_user
-    User.first
-  end
-
-  def parse_json(json_str)
-    begin
-      return BW::JSON.parse(json_str.to_str)
-    rescue
-      App.alert("Error decoding data from server, try again")
-      return false
-    end
-  end
-
-  def api_headers(others = {})
-    headers = { 'Content-Type' => 'application/json' }
-
-    if current_user
-      headers["Authorization"] = "Token token=\"#{current_user.auth_token}\""
-    end
-
-    headers.merge(others)
-  end
-
   def font_awesome_tab_icon(icon_name, options = {})
     options = {
       color: :black.uicolor,

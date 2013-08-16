@@ -8,7 +8,7 @@ module ProMotion
       super
 
       # Check to see if we are logged in, and if not present the login screen modal
-      if !current_user
+      if !User.current
         logout
       end
     end

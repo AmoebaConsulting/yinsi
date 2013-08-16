@@ -6,7 +6,7 @@
 # the user model (it is de-normalized).
 #
 
-class User
+class User < BaseModel
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
   include MotionModel::Validatable
@@ -26,80 +26,72 @@ class User
   API_REGISTER_ENDPOINT = "API".info_plist + "/api/v1/users.json"
   API_LOGIN_ENDPOINT = "API".info_plist + "/api/v1/users/sessions.json"
 
-  def self.register(fields, &block)
-    data = BW::JSON.generate({ user: {
-      email: fields[:email],
-      name: fields[:name],
-      password: fields[:password],
-      password_confirmation: fields[:password_confirmation]
-    } })
-
+  def self.register(fields, &callback)
     SVProgressHUD.showWithStatus("Registering new account...", maskType:SVProgressHUDMaskTypeGradient)
 
-    BW::HTTP.post(API_REGISTER_ENDPOINT, { headers: YinsiHelpers.api_headers , payload: data } ) do |response|
-      SVProgressHUD.dismiss
-      if response.status_description.nil?
-        App.alert(response.error_message)
-      else
-        json = YinsiHelpers.parse_json(response.body)
+    http_query(API_REGISTER_ENDPOINT) do |q|
+      q.data[:user] = fields
+      q.verb = :post
 
-        if response.ok? && json
-          # Build a user object and save it
-          build_and_save_user_from_json(json)
-          block.call(json) if block
-        elsif response.status_code == 406 || response.status_code == 409
-          # 406: Username is taken (or otherwise invalid)
-          # 409: Email address is already in use
-          info = "(unknown)"
-          info = json['info'] if json
-          App.alert(info)
-        elsif response.status_code == 422
-          info = "(unknown)"
-          info = json['info'] if json
-          App.alert("Server Error: #{info}.")
-        else
-          App.alert("Unknown Failure! Try again.")
-        end
+      q.response do |res|
+        build_and_save_user_from_response(res) if res.success?
+        callback.call(res) if callback
+        SVProgressHUD.dismiss
       end
+
+      q.error(/40[69]/) do |res|
+        # 406: Username is taken (or otherwise invalid)
+        # 409: Email address is already in use
+        info = "Unknown registration error"
+        info = res.info unless res.info.empty?
+        App.alert(info)
+      end
+
+      q.error(422) do |res|
+        info = "(unknown)"
+        info = res.info unless res.info.empty?
+        App.alert("Error: #{info}")
+      end
+
     end
+
+
   end
 
-  def self.login(fields, &block)
-    data = BW::JSON.generate({ user: {
-      name: fields[:name],
-      password: fields[:password]
-    } })
-
+  def self.login(fields, &callback)
     SVProgressHUD.showWithStatus("Logging in...", maskType:SVProgressHUDMaskTypeGradient)
-    BW::HTTP.post(API_LOGIN_ENDPOINT, { headers: YinsiHelpers.api_headers , payload: data } ) do |response|
-      if response.status_description.nil?
-        App.alert(response.error_message)
-      else
-        json = YinsiHelpers.parse_json(response.body)
-        if response.ok? && json
-          build_and_save_user_from_json(json)
-          block.call(json) if block
-        elsif response.status_code.to_s =~ /40\d/
-          info = "Login Failed"
-          info = json['info'] if json && json.include?('info')
-          App.alert(info)
-        else
-          App.alert(response.to_str)
-        end
+
+    http_query(API_LOGIN_ENDPOINT) do |q|
+      q.data[:user] = fields
+      q.verb = :post
+
+      q.response do |res|
+        build_and_save_user_from_response(res) if res.success?
+        callback.call(res) if callback
+        SVProgressHUD.dismiss
       end
-      SVProgressHUD.dismiss
+
+      q.error(/40\d/) do |res|
+        info = "Login Failed"
+        info = res.info unless res.info.empty?
+        App.alert(info)
+      end
     end
   end
 
-  def self.build_and_save_user_from_json(json)
+  def self.build_and_save_user_from_response(res)
     User.destroy_all
-    u = User.new name:  json['data']['user']['name'],
-             email: json['data']['user']['email'],
-             created_at: json['data']['user']['created_at'],
-             updated_at: json['data']['user']['updated_at'],
-             auth_token: json['data']['auth_token']
+    fields = res['user']
+    u = User.new name:  fields['name'],
+             email: fields['email'],
+             created_at: fields['created_at'],
+             updated_at: fields['updated_at'],
+             auth_token: res['auth_token']
     u.save(:validate => false)
     u
   end
 
+  def self.current
+    User.first
+  end
 end

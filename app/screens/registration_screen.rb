@@ -112,9 +112,9 @@ class RegistrationScreen < PM::FormotionScreen
       return
     end
 
-    User.register(fields) do
+    User.register(fields) do |response|
       # Dismiss the login & registration if it's successful
-      self.presentingViewController.dismiss
+      self.presentingViewController.dismiss if response.success?
     end
   end
 

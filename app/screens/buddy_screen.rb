@@ -30,27 +30,36 @@ class BuddyScreen < PM::TableScreen
 
   # Looks like this is only fired once, when the view is first presented
   def will_present
-    download_table_data
+    Buddy.download_all
+  end
+
+  def view_did_load
+    @task_model_change_observer = Buddy.observer do |notification|
+      #notification.object and notification.userData are useful. {:action=>'add'} for example
+      reload_data
+    end
+  end
+
+  def will_disappear
+    unobserve @task_model_change_observer
   end
 
   def table_data
-    @table_data ||= []
+    @table_data = [{
+                     cells: Buddy.all.map do |buddy|
+                       {
+                         title:         buddy.name,
+                         action:        :select_buddy,
+                         editing_style: :delete,
+                         arguments:     { buddy: buddy }
+                       }
+                     end
+                   }]
   end
 
-  def download_table_data
-    Buddy.download_all do
-      @table_data = [{
-                       cells: Buddy.all.map do |buddy|
-                         {
-                           title:         buddy.name,
-                           action:        :select_buddy,
-                           editing_style: :delete,
-                           arguments:     { buddy: buddy }
-                         }
-                       end
-                     }]
-      update_table_data
-    end
+  def reload_data
+    table_data
+    update_table_data
   end
 
   def table_data_index
@@ -78,8 +87,9 @@ class BuddyScreen < PM::TableScreen
   end
 
   def on_refresh
-    download_table_data
-    end_refreshing
+    Buddy.download_all do |response|
+      end_refreshing
+    end
   end
 
   def select_buddy(args)

@@ -52,10 +52,7 @@ class User < BaseModel
         info = res.info unless res.info.empty?
         App.alert("Error: #{info}")
       end
-
     end
-
-
   end
 
   def self.login(fields, &callback)

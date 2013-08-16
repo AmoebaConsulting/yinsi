@@ -41,4 +41,8 @@ module YinsiHelpers
     self.set_tab_bar_item icon: {selected: icon, unselected: icon}, title: title
   end
 
+  def unobserve(observer)
+    App.notification_center.unobserve observer
+  end
+
 end

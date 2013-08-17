@@ -44,6 +44,12 @@ Motion::Project::App.setup do |app|
   # workaround for a RM bug and Bubblewrap, should be solved in the next RM release
   #app.detect_dependencies = false
 
+  # Ensure that our model libraries are available
+  model_deps = Dir['app/models/*'].inject({}) do |deps, model|
+    deps.merge({ model => 'lib/restful_model.rb'})
+  end
+  app.files_dependencies model_deps
+
   # CoaoaPods Dependency Management
   app.pods do
     pod 'SVProgressHUD', :git => "https://github.com/samvermette/SVProgressHUD.git"

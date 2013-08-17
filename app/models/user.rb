@@ -10,6 +10,9 @@ class User < BaseModel
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
   include MotionModel::Validatable
+  include MotionModel::RestfulModel
+
+  @primary_key = :name
 
   columns :name        => :string,
           :email       => {type: :string, default: ''},
@@ -19,7 +22,7 @@ class User < BaseModel
 
   validate :name, :presence => true
   validate :name, :length => 4..32
-  validate :email, :email
+  validate :email, :email => true
 
   has_many    :buddies, :dependent => :destroy
 
@@ -79,16 +82,22 @@ class User < BaseModel
   def self.build_and_save_user_from_response(res)
     User.destroy_all
     fields = res['user']
-    u = User.new name:  fields['name'],
-             email: fields['email'],
-             created_at: fields['created_at'],
-             updated_at: fields['updated_at'],
-             auth_token: res['auth_token']
-    u.save(:validate => false)
+    u = User.create_from_server name:       fields['name'],
+                                email:      fields['email'],
+                                created_at: fields['created_at'],
+                                updated_at: fields['updated_at'],
+                                auth_token: res['auth_token']
     u
   end
 
   def self.current
     User.first
+  end
+
+  def validate_email(field, value, setting)
+    # Emails are valid so long as they are empty
+    return true if value.empty?
+    # But if they aren't empty, run the normal validation against it
+    super
   end
 end

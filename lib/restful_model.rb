@@ -5,7 +5,7 @@ module MotionModel
       base.extend(ClassMethods)
       base.class_eval {
         # Store the model's sub-class so we can use it in the module (i.e. User)
-        @model_class = Object.const_get(base.name)
+        @model_class = base
       }
     end
 
@@ -38,7 +38,7 @@ module MotionModel
           existing_records_count = self.where(@primary_key).eq(args[@primary_key]).all.count
           if existing_records_count == 0
             b = self.new(args)
-            b.add_to_store()
+            b.add_to_store
             b.issue_server_sync_notification
             return b
           end

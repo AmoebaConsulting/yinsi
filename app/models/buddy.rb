@@ -15,6 +15,8 @@ class Buddy < BaseModel
   collection_uri "API".info_plist + "/api/v1/buddies.json"
   element_uri "API".info_plist + "/api/v1/buddies/:primary_key.json"
 
+  restful_errors :save => {404 => "User not found", 406 => "Buddy already exists"}
+
   def self.download_all(&callback)
     http_query(collection_uri) do |q|
 
@@ -35,14 +37,6 @@ class Buddy < BaseModel
       end
     end
   end
-
-  #def build_data_for_server
-  #  {buddy: { name: self.name }}
-  #end
-
-  #def decode_data_from_server(data)
-  #  {name: data['name'], created_at: data['created_at']}
-  #end
 
   def name=(val)
     # Buddies names are immutable, that is they can only be set on creation.

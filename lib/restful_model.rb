@@ -64,6 +64,11 @@ module MotionModel
         @element_uri
       end
 
+      def restful_errors(errors=nil)
+        @restful_errors = errors if errors
+        @restful_errors || {}
+      end
+
       # This is the name of the "root node" in JSON responses for this model
       # Usually, this is just the lowercase singular name of the model.
       def root_node
@@ -120,9 +125,13 @@ module MotionModel
               end
             end
           else # response was a failure
-            self.skip_next_sync!
             self.destroy
-            puts "ERROR: Could not save record to server, destroying it..." #TODO: Provide GUI feedback
+          end
+        end
+
+        error_messages_for(:save).each do |code, msg|
+          q.error(code) do
+            App.alert(msg)
           end
         end
       end
@@ -170,13 +179,24 @@ module MotionModel
       end
     end
 
+    def uri
+      self.class.element_uri.gsub(/:primary_key/, self.send(self.class.primary_key))
+    end
+
+    ################
+    # Private Functions
+    ################
+
+    private
+
+    # Return the error messages for given operation (:save or :destroy)
+    def error_messages_for(operation)
+      self.class.restful_errors[operation]
+    end
+
     # Allow http_query to be accessed from the instance too
     def http_query(url, &block)
       self.class.http_query(url, &block)
-    end
-
-    def uri
-      self.class.element_uri.gsub(/:primary_key/, self.send(self.class.primary_key))
     end
 
   end

@@ -1,20 +1,22 @@
 class Buddy < BaseModel
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
+  include MotionModel::Validatable
   include MotionModel::RestfulModel
   include YinsiHelpers
 
   columns     :name       => :string,
               :created_at => :date
 
-  belongs_to  :user
+  validate    :name, :unique => true
 
-  @primary_key = :name
+  primary_key :name
 
-  API_BUDDIES_ENDPOINT = "API".info_plist + "/api/v1/buddies.json"
+  collection_uri "API".info_plist + "/api/v1/buddies.json"
+  element_uri "API".info_plist + "/api/v1/buddies/:primary_key.json"
 
   def self.download_all(&callback)
-    http_query(API_BUDDIES_ENDPOINT) do |q|
+    http_query(collection_uri) do |q|
 
       q.response do |res|
         if res.success?
@@ -33,6 +35,14 @@ class Buddy < BaseModel
       end
     end
   end
+
+  #def build_data_for_server
+  #  {buddy: { name: self.name }}
+  #end
+
+  #def decode_data_from_server(data)
+  #  {name: data['name'], created_at: data['created_at']}
+  #end
 
   def name=(val)
     # Buddies names are immutable, that is they can only be set on creation.

@@ -12,7 +12,7 @@ class User < BaseModel
   include MotionModel::Validatable
   include MotionModel::RestfulModel
 
-  @primary_key = :name
+  primary_key :name
 
   columns :name        => :string,
           :email       => {type: :string, default: ''},
@@ -23,8 +23,6 @@ class User < BaseModel
   validate :name, :presence => true
   validate :name, :length => 4..32
   validate :email, :email => true
-
-  has_many    :buddies, :dependent => :destroy
 
   API_REGISTER_ENDPOINT = "API".info_plist + "/api/v1/users.json"
   API_LOGIN_ENDPOINT = "API".info_plist + "/api/v1/users/sessions.json"

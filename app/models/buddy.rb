@@ -9,6 +9,7 @@ class Buddy < BaseModel
               :created_at => :date
 
   validate    :name, :unique => true
+  validate    :name, :length => 4..32
 
   primary_key :name
 

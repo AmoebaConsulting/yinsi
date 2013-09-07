@@ -93,7 +93,7 @@ class HttpBuilder
         if !error_handled
           if @default_error_callback
             @default_error_callback.call(yinsi_response)
-          elsif yinsi_response.invalid?
+          elsif !yinsi_response.info.empty?
             App.alert(yinsi_response.info)
           else
             App.alert("Unknown server error occurred")

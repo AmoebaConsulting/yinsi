@@ -41,11 +41,10 @@ class Buddy < BaseModel
 
   def name=(val)
     # Buddies names are immutable, that is they can only be set on creation.
-    if self.send(:name).nil?
+    if self.name.nil?
       _set_attr(:name, val)
     else
       raise "Cannot change the name of an existing buddy"
     end
   end
-
 end

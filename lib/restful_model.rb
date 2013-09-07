@@ -97,7 +97,7 @@ module MotionModel
         return true
       end
 
-      # If we aren't valid, break out
+      #If we aren't valid, break out
       return true unless valid?
 
       if new_record?

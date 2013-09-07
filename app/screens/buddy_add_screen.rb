@@ -33,7 +33,16 @@ class BuddyAddScreen < PM::Screen
   end
 
   def submit
-    puts "Submitting"
+    b = Buddy.create(name: @username.text)
+
+    if b.valid?
+      close
+    else
+      b.error_messages.first.each do |col, error|
+        App.alert(error)
+      end
+      @username.text = ""
+    end
   end
 
   def back

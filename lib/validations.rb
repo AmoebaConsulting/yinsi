@@ -1,10 +1,15 @@
 module MotionModel
   module Validatable
     def validate_unique(field, value, setting)
-      if self.class.where(field).eq(value).count > 0
-        add_message(field, "#{field} must be unique")
-        return false
+      results = self.class.where(field).eq(value).all
+
+      results.each do |record|
+        if record != self
+          add_message(field, "#{field} must be unique")
+          return false
+        end
       end
+
       true
     end
   end

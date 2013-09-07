@@ -33,7 +33,9 @@ class BuddyScreen < PM::TableScreen
     Buddy.download_all
   end
 
-  def view_did_load
+  def will_appear
+    reload_data
+
     @task_model_change_observer = Buddy.observer do |notification|
       #notification.object and notification.userData are useful. {:action=>'add'} for example
       reload_data

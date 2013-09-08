@@ -2,7 +2,17 @@ Teacup::Stylesheet.new :buddy do
   import :yinsi_application
 
   style :root,
-    backgroundColor: @clouds
+    backgroundColor: @white
+
+  style :table_cell,
+    backgroundColor: @clouds,
+    #separatorColor: UIColor.redColor,
+    selectionStyle: UITableViewCellSelectionStyleNone
+
+  style :table_cell_title,
+    textColor: @blackish
+
+  # Add a buddy screen styles:
 
   style :username, extends: :big_input,
         returnKeyType: :go,

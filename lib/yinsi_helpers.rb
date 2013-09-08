@@ -16,16 +16,32 @@ module YinsiHelpers
     Teacup::Stylesheet[:yinsi_application].instance_variable_get("@#{name.to_s}".to_sym)
   end
 
-  def font_awesome_tab_icon(icon_name, options = {})
+  def font_awesome_icon(icon_name, options = {})
+    if options[:image_size] && !options[:font_size]
+      options[:font_size] = options[:image_size]-1
+    end
+
     options = {
       color: :black.uicolor,
-      background_color: UIColor.clearColor
+      background_color: UIColor.clearColor,
+      image_size: 30,
+      font_size: 29
     }.merge(options)
+
     FontAwesomeKit.imageForIcon(FontAwesomeKit.allIcons["FAKIcon#{icon_name.to_s.sub('-','_').camelize.sub('Icon','')}"],
                                 imageSize: CGSizeMake(30,30),
                                 fontSize: 29,
                                 attributes: {'FAKImageAttributeForegroundColor' => options[:color],
                                              'FAKImageAttributeBackgroundColor' => options[:background_color]})
+
+  end
+
+  def font_awesome_tab_icon(icon_name, options = {})
+    options = {
+      image_size: 30,
+      font_size: 29,
+    }.merge(options)
+    font_awesome_icon(icon_name, options)
   end
 
   def dismissKeyboard

@@ -15,7 +15,7 @@ class BuddyAddScreen < PM::Screen
       auto do
         metrics 'margin' => 20
 
-        vertical "|-75-[username(==60)]-margin-[add_button(==60)]-(>=margin)-|"
+        vertical "|-75-[username(==40)]-margin-[add_button(==60)]-(>=margin)-|"
         horizontal "|-margin-[username]-margin-|"
         horizontal "|-margin-[add_button]-margin-|"
       end

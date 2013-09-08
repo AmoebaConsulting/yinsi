@@ -1,9 +1,10 @@
 class BuddyScreen < PM::TableScreen
   include YinsiHelpers
+  #include Teacup::TableViewDelegate
 
   title "Buddies"
   indexable
-  searchable placeholder: "Search for a buddy..."
+  #searchable placeholder: "Search for a buddy..."
   refreshable callback: :on_refresh,
               pull_message: "Pull to refresh",
               refreshing: "Refreshing data…",
@@ -21,8 +22,8 @@ class BuddyScreen < PM::TableScreen
 
     # Style the navigation bar (& buttons in it)
     self.navigationController.navigationBar.configureFlatNavigationBarWithColor(stylesheet_var(:green_medium))
-    UIBarButtonItem.configureFlatButtonsWithColor stylesheet_var(:grey_dark),
-      highlightedColor: stylesheet_var(:grey),
+    UIBarButtonItem.configureFlatButtonsWithColor stylesheet_var(:blackish),
+      highlightedColor: stylesheet_var(:grey_dark),
       cornerRadius: 3
 
     table_view.contentOffset = CGPointMake(0, 44)
@@ -51,8 +52,17 @@ class BuddyScreen < PM::TableScreen
                      cells: Buddy.all.map do |buddy|
                        {
                          title:         buddy.name,
+                         #subtitle:      "Added 42 days ago.",
                          action:        :select_buddy,
                          editing_style: :delete,
+                         #cell_style:    UITableViewCellStyleSubtitle,
+                         cell_class:    StyleableTableCell,
+                         height:        60,
+                         image:         { image: font_awesome_icon(:user, image_size: 150,
+                                                                   color: stylesheet_var(:blackish),
+                                                                   background_color: stylesheet_var(:green)),
+                                          radius: 15 },
+                         #stylename:     :buddy_cell,
                          arguments:     { buddy: buddy }
                        }
                      end
@@ -74,15 +84,15 @@ class BuddyScreen < PM::TableScreen
     ('a'..'z').to_a
   end
 
-  def create_search_bar(params)
-    search_bar = UISearchBar.alloc.initWithFrame(params[:frame])
-    search_bar.autoresizingMask = UIViewAutoresizingFlexibleWidth
-    search_bar.barStyle = UIBarStyleDefault
-
-    search_bar.subviews[0].removeFromSuperview
-
-    search_bar
-  end
+  #def create_search_bar(params)
+  #  search_bar = UISearchBar.alloc.initWithFrame(params[:frame])
+  #  search_bar.autoresizingMask = UIViewAutoresizingFlexibleWidth
+  #  search_bar.barStyle = UIBarStyleDefault
+  #
+  #  search_bar.subviews[0].removeFromSuperview
+  #
+  #  search_bar
+  #end
 
   def add_buddy
     open BuddyAddScreen, in_tab: "Buddies"

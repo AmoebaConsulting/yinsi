@@ -52,7 +52,7 @@ class RegistrationScreen < PM::FormotionScreen
           {
             title: "Register",
             type: :yinsi_button,
-            value: {backgroundColor: stylesheet_var(:grey_dark)}
+            value: {backgroundColor: stylesheet_var(:blackish)}
           }
         ]
       }, {
@@ -86,10 +86,10 @@ class RegistrationScreen < PM::FormotionScreen
     .setBackgroundView(view_from_image(color_image(stylesheet_var(:green_medium), self.view.backgroundView.frame)))
 
     UILabel.appearanceWhenContainedIn(UITableViewHeaderFooterView, RegistrationScreen, nil)
-    .setTextColor(stylesheet_var(:grey_dark)).setShadowColor(UIColor.clearColor)
+    .setTextColor(stylesheet_var(:blackish)).setShadowColor(UIColor.clearColor)
 
     UITableViewCell.appearanceWhenContainedIn(RegistrationScreen, nil)
-    .setTextColor(stylesheet_var(:grey_dark))
+    .setTextColor(stylesheet_var(:blackish))
   end
 
   def register

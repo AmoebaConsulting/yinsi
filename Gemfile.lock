@@ -5,6 +5,14 @@ GIT
   specs:
     ProMotion (1.0.3)
 
+GIT
+  remote: https://github.com/AmoebaConsulting/motion-cocoapods.git
+  revision: 2b4c171ee427f9b36f8ec78c99164d8934d9f972
+  branch: fix_linking_errors
+  specs:
+    motion-cocoapods (1.3.6)
+      cocoapods (>= 0.17.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -14,31 +22,29 @@ GEM
     awesome_print_motion (0.1.0)
     bubble-wrap (1.3.0)
     claide (0.3.2)
-    cocoapods (0.23.0)
-      activesupport (~> 3.2.13)
+    cocoapods (0.24.0)
+      activesupport (~> 3.0)
       claide (~> 0.3.2)
-      cocoapods-core (= 0.23.0)
-      cocoapods-downloader (~> 0.1.2)
+      cocoapods-core (= 0.24.0)
+      cocoapods-downloader (~> 0.2.0)
       colored (~> 1.2)
       escape (~> 0.0.4)
-      json (~> 1.8.0)
-      open4 (~> 1.3.0)
-      xcodeproj (~> 0.9.0)
-    cocoapods-core (0.23.0)
-      activesupport (~> 3.2.13)
-      json (~> 1.8.0)
-      nap (~> 0.5.1)
-    cocoapods-downloader (0.1.2)
+      json (~> 1.8)
+      open4 (~> 1.3)
+      xcodeproj (~> 0.10.0)
+    cocoapods-core (0.24.0)
+      activesupport (~> 3.0)
+      json (~> 1.8)
+      nap (~> 0.5)
+    cocoapods-downloader (0.2.0)
     colored (1.2)
     escape (0.0.4)
     formotion (1.4.0)
       bubble-wrap (~> 1.3.0)
       motion-require (~> 0.0.3)
     geomotion (0.12.1)
-    i18n (0.6.4)
+    i18n (0.6.5)
     json (1.8.0)
-    motion-cocoapods (1.3.5)
-      cocoapods (>= 0.17.0)
     motion-layout (0.0.1)
     motion-map (0.0.4)
     motion-require (0.0.7)
@@ -48,7 +54,7 @@ GEM
     motion_model (0.4.6)
       bubble-wrap (= 1.3.0)
       motion-support (>= 0.1.0)
-    multi_json (1.7.8)
+    multi_json (1.7.9)
     nap (0.5.1)
     open4 (1.3.0)
     rake (10.1.0)
@@ -58,8 +64,8 @@ GEM
       sugarcube
       teacup
     teacup (2.1.6)
-    xcodeproj (0.9.0)
-      activesupport (~> 3.2.13)
+    xcodeproj (0.10.1)
+      activesupport (~> 3.0)
       colored (~> 1.2)
 
 PLATFORMS
@@ -71,7 +77,7 @@ DEPENDENCIES
   bubble-wrap (= 1.3.0)
   formotion (~> 1.4.0)
   geomotion (= 0.12.1)
-  motion-cocoapods (~> 1.3.5)
+  motion-cocoapods!
   motion-layout (~> 0.0.1)
   motion-map (= 0.0.4)
   motion-rubberstamp (= 0.0.6)

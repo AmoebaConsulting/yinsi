@@ -54,7 +54,8 @@ gem "awesome_print_motion",   "0.1.0"
 
 # Lets us use the cocoapods ObjC dependency manager
 #
-gem "motion-cocoapods", "~> 1.3.5"
+#gem "motion-cocoapods", "~> 1.3.5"
+gem "motion-cocoapods", :git => "https://github.com/AmoebaConsulting/motion-cocoapods.git", :branch => "fix_linking_errors"
 
 # Neat gem for creating forms on iOS
 # http://clayallsopp.github.io/formotion/

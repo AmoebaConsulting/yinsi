@@ -55,6 +55,7 @@ Motion::Project::App.setup do |app|
     pod 'SVProgressHUD', :git => "https://github.com/samvermette/SVProgressHUD.git"
     pod 'FontAwesomeKit'
     pod 'FlatUIKit'
-    pod 'pjsip'
+    pod 'pjsip', :git => "https://github.com/AmoebaConsulting/pjsip.git"
+    pod 'gossip', :git => "https://github.com/AmoebaConsulting/gossip.git", :branch => "podified"
   end
 end

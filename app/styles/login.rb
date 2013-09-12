@@ -1,5 +1,5 @@
 Teacup::Stylesheet.new :login do
-  import :yinsi_application
+  import :application
 
   style :title,
     text: 'Yinsi Mobile',
@@ -10,16 +10,11 @@ Teacup::Stylesheet.new :login do
     textAlignment: :center,
     backgroundColor: :clear
 
-  style :login_input, extends: :big_input,
-    backgroundColor: @green,
-    textColor: @white,
-    placeholderColor: @white.colorWithAlphaComponent(0.5)
-
-  style :username, extends: :login_input,
+  style :username, extends: :big_input_dark,
     placeholder: "Username",
     returnKeyType: :next
 
-  style :password, extends: :login_input,
+  style :password, extends: :big_input_dark,
     placeholder: "Password",
     returnKeyType: :go,
     secure: true

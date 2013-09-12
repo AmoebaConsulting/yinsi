@@ -1,5 +1,5 @@
 Teacup::Stylesheet.new :buddy do
-  import :yinsi_application
+  import :application
 
   style :root,
     backgroundColor: @white

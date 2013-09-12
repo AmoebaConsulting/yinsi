@@ -1,4 +1,4 @@
-Teacup::Stylesheet.new :yinsi_application do
+Teacup::Stylesheet.new :application do
   @green = "#A5E200".to_color
   @green_medium = "#89BB00".to_color
   @green_dark = "#5F7C1E".to_color
@@ -30,6 +30,11 @@ Teacup::Stylesheet.new :yinsi_application do
     layer: {
       cornerRadius: 5
     }
+
+  style :big_input_dark, extends: :big_input,
+    backgroundColor: @green,
+    textColor: @white,
+    placeholderColor: @white.colorWithAlphaComponent(0.5)
 
   style :big_button,
     buttonColor: @grey_medium,

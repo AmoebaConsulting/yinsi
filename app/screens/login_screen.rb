@@ -4,7 +4,9 @@ class LoginScreen < PM::Screen
 
   stylesheet :login
 
-  # on_load runs once, during the creation of the view
+  # on_load normally runs once, during the creation of the view
+  # but can run more than once if the view is unloaded (and inactive)
+  # in a low-memory situation
   def on_load
     layout (self.view, :root) do
 

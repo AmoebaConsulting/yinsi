@@ -10,10 +10,10 @@ module YinsiHelpers
     # We need to hit a fake query to Teacup::Stylesheet to ensure it has parsed it, or
     # it's possible that it has not yet been loaded.
     @query_completed ||= begin
-      Teacup::Stylesheet[:yinsi_application].query(:dummy)
+      Teacup::Stylesheet[:application].query(:dummy)
       true
     end
-    Teacup::Stylesheet[:yinsi_application].instance_variable_get("@#{name.to_s}".to_sym)
+    Teacup::Stylesheet[:application].instance_variable_get("@#{name.to_s}".to_sym)
   end
 
   def font_awesome_icon(icon_name, options = {})

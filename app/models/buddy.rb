@@ -1,4 +1,4 @@
-class Buddy < BaseModel
+class Buddy
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
   include MotionModel::Validatable

@@ -6,11 +6,12 @@
 # the user model (it is de-normalized).
 #
 
-class User < BaseModel
+class User
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
   include MotionModel::Validatable
   include MotionModel::RestfulModel
+  include YinsiHelpers
 
   primary_key :name
 

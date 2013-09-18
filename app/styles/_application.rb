@@ -12,7 +12,11 @@ Teacup::Stylesheet.new :application do
   @clouds = "#ECF0F1".to_color
 
   style :root,
-    backgroundColor: @green_medium
+    #backgroundColor: @green_medium
+    background_gradient: {
+      top: :black.uicolor,
+      bottom: "#403942".uicolor
+    }
 
   style :basic_input,
     borderStyle: :none,

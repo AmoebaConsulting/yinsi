@@ -61,4 +61,8 @@ module YinsiHelpers
     App.notification_center.unobserve observer
   end
 
+  def tab_titled(title)
+    App.delegate.tab_bar.find_tab(title)
+  end
+
 end

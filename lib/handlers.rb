@@ -5,6 +5,11 @@ Teacup.handler UIView, :nav_background do |view, hash|
   UINavigationBar.appearance.setTitleVerticalPositionAdjustment(7.0, forBarMetrics:UIBarMetricsLandscapePhone)
 end
 
+Teacup.handler UIView, :background_gradient do |view, hash|
+  background_image = Graphics::gradient_image_with_top(hash[:top], hash[:bottom], view.frame)
+  view.setBackgroundColor(UIColor.colorWithPatternImage(background_image))
+end
+
 Teacup.handler UIRoundedRectButton, :button_background do |view, image, text_color|
   text_color ||= UIColor.whiteColor
   view.setBackgroundImage(image.uiimage, forState:UIControlStateNormal)

@@ -16,7 +16,6 @@ class AppDelegate < PM::Delegate
 
     # include the SaveUIPlugin, which is not included by default
     #  #Motion::Xray.register(Motion::Xray::SaveUIPlugin.new)
-
   end
 
 end

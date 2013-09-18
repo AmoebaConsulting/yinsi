@@ -15,18 +15,22 @@ class User
 
   primary_key :name
 
-  columns :name        => :string,
-          :email       => {type: :string, default: ''},
-          :auth_token  => :string,
-          :created_at  => :date,
-          :updated_at  => :date
+  columns :name         => :string,
+          :email        => {type: :string, default: ''},
+          :auth_token   => :string,
+          :created_at   => :date,
+          :updated_at   => :date,
+          :sip_proxy    => {type: :string, default: ''},
+          :sip_username => {type: :string, default: ''},
+          :sip_password => {type: :string, default: ''}
 
   validate :name, :presence => true
   validate :name, :length => 4..32
   validate :email, :email => true
 
-  API_REGISTER_ENDPOINT = "API".info_plist + "/api/v1/users.json"
-  API_LOGIN_ENDPOINT = "API".info_plist + "/api/v1/users/sessions.json"
+  API_REGISTER_ENDPOINT = "API".info_plist + "/api/v1/accounts.json"
+  API_LOGIN_ENDPOINT = "API".info_plist + "/api/v1/accounts/login.json"
+  API_SIP_LOOKUP_ENDPOINT = "API".info_plist + "/api/v1/users/:id/sip_address.json"
 
   def self.register(fields, &callback)
     SVProgressHUD.showWithStatus("Registering new account...", maskType:SVProgressHUDMaskTypeGradient)
@@ -81,11 +85,14 @@ class User
   def self.build_and_save_user_from_response(res)
     User.destroy_all
     fields = res['user']
-    u = User.create_from_server name:       fields['name'],
-                                email:      fields['email'],
-                                created_at: fields['created_at'],
-                                updated_at: fields['updated_at'],
-                                auth_token: res['auth_token']
+    u = User.create_from_server name:         fields['name'],
+                                email:        fields['email'],
+                                created_at:   fields['created_at'],
+                                updated_at:   fields['updated_at'],
+                                auth_token:   res['auth_token'],
+                                sip_proxy:    res['sip_info']['proxy'],
+                                sip_username: res['sip_info']['username'],
+                                sip_password: res['sip_info']['password']
     u
   end
 
@@ -98,5 +105,26 @@ class User
     return true if value.empty?
     # But if they aren't empty, run the normal validation against it
     super
+  end
+
+  #
+  # Look up a user's SIP address by username. Since this is an async operation, the
+  # callback will be called (a block param passed into this method). It will be passed the username
+  # if things were successful, or nil if the user was not found.
+  #
+  def self.lookup_sip_address(username, &callback)
+    http_query(API_SIP_LOOKUP_ENDPOINT.gsub(/:id/, username)) do |q|
+      q.verb = :get
+
+      q.response do |res|
+        sip_address = res['sip_address'] if res.success?
+        callback.call(sip_address) if callback
+      end
+
+      q.error(404) do |res|
+        info = "User not found"
+        App.alert(info)
+      end
+    end
   end
 end

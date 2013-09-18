@@ -55,7 +55,10 @@ class LoginScreen < PM::Screen
   def login
     fields = { name: @username.text, password: @password.text }
     User.login(fields) do |response|
-      dismiss if response.success?
+      if response.success?
+        tab_titled("Call").setup_sip_agent
+        dismiss
+      end
     end
   end
 

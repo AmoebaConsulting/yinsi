@@ -5,7 +5,7 @@ Teacup::Stylesheet.new :login do
     text: 'SUBSPEAK',
     numberOfLines: 1,
     font: :bold.uifont(24),
-    textColor: @green,
+    textColor: @green_logo,
     textAlignment: :center,
     backgroundColor: :clear,
 

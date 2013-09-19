@@ -40,7 +40,7 @@ Teacup::Stylesheet.new :application do
     textColor: @white.colorWithAlphaComponent(0.5)
 
   #eventually remove this style once its not used
-  style :big_input_dark, extends: :big_input
+  #style :big_input_dark, extends: :big_input
 
 
 

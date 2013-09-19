@@ -1,99 +1,53 @@
-class RegistrationScreen < PM::FormotionScreen
+class RegistrationScreen < PM::Screen
   include YinsiHelpers
   include Graphics
+  include AnimatedTextFields
 
   stylesheet :registration
 
-  def table_data
-    select_style = :none
-
-    {
-      sections: [{
-        rows: [
-          {
-            title: "Username",
-            key: :name,
-            placeholder: "choose a name",
-            type: :string,
-            auto_correction: :no,
-            auto_capitalization: :none,
-            selection_style: select_style
-          }, {
-            title: "Password",
-            key: :password,
-            placeholder: "required",
-            type: :string,
-            secure: true,
-            selection_style: select_style
-          }, {
-            title: "Confirm Password",
-            key: :password_confirmation,
-            placeholder: "required",
-            type: :string,
-            secure: true,
-            selection_style: select_style
-          }
-        ],
-      }, {
-        title: "Email is completely optional, and if provided will allow you to reset your password.",
-        rows: [
-          {
-            title: "Email",
-            key: :email,
-            placeholder: "optional",
-            type: :email,
-            auto_correction: :no,
-            auto_capitalization: :none,
-            selection_style: select_style
-          }
-        ]
-      }, {
-        rows: [
-          {
-            title: "Register",
-            type: :yinsi_button,
-            value: {backgroundColor: stylesheet_var(:blackish)}
-          }
-        ]
-      }, {
-        rows: [
-          {
-            title: "Cancel",
-            type: :yinsi_button,
-            value: {backgroundColor: stylesheet_var(:green_medium)}
-          }
-        ]
-
-      }] #Sections
-    }
-  end
 
   def on_load
-    self.form.sections[2].rows[0].on_tap do |row| # Submit button
-      self.form.submit
+    layout (self.view, :root) do
+
+      @user_label = subview(UILabel, :user_label)
+      @user_input = subview(UITextField, :user_input, delegate: self)
+
+      @password_label = subview(UILabel, :password_label)
+      @password_input = subview(UITextField, :password_input, delegate: self)
+
+      @confirm_label = subview(UILabel, :confirm_label)
+      @confirm_input = subview(UITextField, :confirm_input, delegate: self)
+
+      @email_label = subview(UILabel, :email_label)
+      @email_input = subview(UITextField, :email_input, delegate: self)
+
+      @cancel_button = subview(UIButton.custom, :back_button)
+      @register_button = subview(UIButton.custom, :register_button)
+
     end
 
-    self.form.sections[3].rows[0].on_tap do |row| # Cancel button
-      self.form.reset
-      self.dismiss
-    end
+    @fields = [@user_input, @password_input, @confirm_input, @email_input]
 
-    self.form.on_submit do
-      self.register
-    end
+    animate_text_field(@user_input)
+    animate_text_field(@password_input)
+    animate_text_field(@confirm_input)
+    animate_text_field(@email_input)
 
-    UITableView.appearanceWhenContainedIn(RegistrationScreen, nil)
-    .setBackgroundView(view_from_image(color_image(stylesheet_var(:green_medium), self.view.backgroundView.frame)))
+    dismiss_keyboard_on_tap
 
-    UILabel.appearanceWhenContainedIn(UITableViewHeaderFooterView, RegistrationScreen, nil)
-    .setTextColor(stylesheet_var(:blackish)).setShadowColor(UIColor.clearColor)
+    @register_button.on(:touch) { register }
+    @cancel_button.on(:touch) { reset; dismiss }
 
-    UITableViewCell.appearanceWhenContainedIn(RegistrationScreen, nil)
-    .setTextColor(stylesheet_var(:blackish))
   end
 
   def register
-    fields = @form.render
+
+    fields = {
+      name: @user_input.text,
+      password: @password_input.text,
+      password_confirmation: @confirm_input.text,
+      email: @email_input.text
+    }
 
     if fields[:name].empty? ||
       fields[:password].empty? ||
@@ -120,6 +74,23 @@ class RegistrationScreen < PM::FormotionScreen
 
   def dismiss
     self.presentingViewController.dismissModalViewControllerAnimated(true)
+  end
+
+  def reset
+    @fields.each do |f|
+      f.text = ''
+    end
+  end
+
+  def textFieldShouldReturn(text_field)
+    index = @fields.index(text_field)
+    if index == @fields.length - 1
+      register
+    else
+      text_field.resignFirstResponder
+      @fields[index + 1].becomeFirstResponder
+    end
+
   end
 
 end

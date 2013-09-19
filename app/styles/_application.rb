@@ -6,6 +6,8 @@ Teacup::Stylesheet.new :application do
   @purple = "#b390b6".to_color
   @purple_light = "#eacdff".to_color
 
+  @testColor = BubbleWrap.rgba_color(189, 20, 12, 0.4)
+
   @green = "#78daa3".to_color
   @green_light = "#d1ffd5".to_color
 

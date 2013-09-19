@@ -3,11 +3,15 @@ class RegistrationScreen < PM::Screen
   include Graphics
   include AnimatedTextFields
 
+
+
   stylesheet :registration
 
 
   def on_load
     layout (self.view, :root) do
+
+      @title = subview(UILabel, :title)
 
       @user_label = subview(UILabel, :user_label)
       @user_input = subview(UITextField, :user_input, delegate: self)
@@ -18,11 +22,16 @@ class RegistrationScreen < PM::Screen
       @confirm_label = subview(UILabel, :confirm_label)
       @confirm_input = subview(UITextField, :confirm_input, delegate: self)
 
+      @break_line = subview(UILabel, :break_line)
+
       @email_label = subview(UILabel, :email_label)
       @email_input = subview(UITextField, :email_input, delegate: self)
 
-      @cancel_button = subview(UIButton.custom, :back_button)
+      @cancel_button = subview(UIButton.custom, :cancel_button)
       @register_button = subview(UIButton.custom, :register_button)
+
+
+
 
     end
 

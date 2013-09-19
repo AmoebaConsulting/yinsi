@@ -53,8 +53,8 @@ Motion::Project::App.setup do |app|
   # CoaoaPods Dependency Management
   app.pods do
     pod 'SVProgressHUD', :git => "https://github.com/samvermette/SVProgressHUD.git"
-    pod 'FontAwesomeKit'
-    pod 'FlatUIKit'
+    pod 'FontAwesomeKit', :git => "https://github.com/PrideChung/FontAwesomeKit.git"
+    pod 'FlatUIKit', :git => "https://github.com/Grouper/FlatUIKit.git", :tag => "1.2"
     pod 'pjsip', :git => "https://github.com/AmoebaConsulting/pjsip.git"
     pod 'gossip', :git => "https://github.com/AmoebaConsulting/gossip.git", :branch => "podified"
   end

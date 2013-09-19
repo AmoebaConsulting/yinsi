@@ -35,3 +35,18 @@ Teacup.handler UITextField, :placeholderFont do |text_field, font|
   text_field.setValue(font, forKeyPath: "_placeholderLabel.font")
 end
 
+Teacup.handler UITextField, :padding do |text_field, hash|
+  [:left, :right].each do |side|
+    if hash[side]
+      padding_view = UIView.alloc.initWithFrame(CGRectMake(0,0,hash[side],5))
+      text_field.send("#{side}View=", padding_view)
+      text_field.send("#{side}ViewMode=", UITextFieldViewModeAlways)
+    end
+  end
+end
+
+Teacup.handler UIButton, :padding do |button, hash|
+  left = hash[:left] || 0.0
+  right = hash[:right] || 0.0
+  button.titleEdgeInsets = UIEdgeInsetsMake(0.0, left, 0.0, right)
+end

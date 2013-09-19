@@ -2,31 +2,65 @@ Teacup::Stylesheet.new :login do
   import :application
 
   style :title,
-    text: 'Yinsi Mobile',
-    backgroundColor: :clear,
+    text: 'SUBSPEAK',
     numberOfLines: 1,
-    font: :bold.uifont(36),
-    textColor: @white,
+    font: :bold.uifont(24),
+    textColor: @green,
     textAlignment: :center,
-    backgroundColor: :clear
+    backgroundColor: :clear,
 
-  style :username, extends: :big_input_dark,
-    placeholder: "Username",
-    returnKeyType: :next
+    top: 50,
+    width: '100% - 40',
+    left: 20,
+    height: 40
 
-  style :password, extends: :big_input_dark,
-    placeholder: "Password",
+
+
+  style :username, extends: :big_input,
+    placeholder: "USERNAME",
+    font: :normal.uifont(17),
+    returnKeyType: :next,
+
+    left: 0,
+    top: 124,
+    width: 162,
+    height: 38
+
+
+
+  style :password, extends: :big_input,
+    placeholder: "PASSWORD",
     returnKeyType: :go,
-    secure: true
+    font: :normal.uifont(17),
+    secure: true,
 
-  style :login_button, extends: :big_button_dark,
-    height: 60,
-    title: "Login",
-    font: :bold.uifont(24)
+    left: 0,
+    top: 188,
+    width: 162,
+    height: 38
 
-  style :register_button, extends: :big_button_dark,
+  style :login_button, extends: :big_button,
+    height: 80,
+    title: "CONNECT",
+    font: :bold.uifont(17),
+
+    left: 145,
+    top: 248,
+    width: 115,
+    height: 34
+
+  style :register_button, extends: :big_button,
     height: 40,
-    title: "No Account? Register",
-    font: :bold.uifont(16)
+    title: "REGISTER",
+    font: :bold.uifont(17),
+    backgroundColor: @green,
+    titleColor: @green_light,
+    contentHorizontalAlignment: UIControlContentHorizontalAlignmentLeft,
+
+    left: 145,
+    top: 400,
+    width: 315,
+    height: 34,
+    padding: { right: 10, left: 10 }
 
 end

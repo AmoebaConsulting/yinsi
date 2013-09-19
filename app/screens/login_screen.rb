@@ -13,19 +13,20 @@ class LoginScreen < PM::Screen
       @label = subview(UILabel, :title)
       @username = subview(UITextField, :username, delegate: self)
       @password = subview(UITextField, :password, delegate: self)
-      @login_button = subview(FUIButton, :login_button)
-      @register_button = subview(FUIButton, :register_button)
+      @login_button = subview(UIButton.custom, :login_button)
+      @register_button = subview(UIButton.custom, :register_button)
 
-      auto do
-        metrics 'margin' => 20
-
-        vertical "|-50-[title]-75-[username]-margin-[password]-margin-[login_button(==60)]->=20-[register_button(==40)]-margin-|"
-        horizontal "|-[title]-|"
-        horizontal "|-margin-[username]-margin-|"
-        horizontal "|-margin-[password]-margin-|"
-        horizontal "|-margin-[login_button]-margin-|"
-        horizontal "|-margin-[register_button]-margin-|"
-      end
+      #auto do
+      #  metrics 'margin' => 20
+      #  #metrics '2margin' => 20
+      #
+      #  vertical "|-50-[title]-75-[username]-margin-[password(==80)]-margin-[login_button(==30)]->=20-[register_button(==40)]-margin-|"
+      #  horizontal "|-[title]-|"
+      #  horizontal "|-margin-[username]-margin-|"
+      #  horizontal "|[password]-margin-|"
+      #  horizontal "|-margin-[login_button]-margin-|"
+      #  horizontal "|-margin-[register_button]-margin-|"
+      #end
     end
 
     animate_text_field(@username)

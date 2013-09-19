@@ -12,7 +12,7 @@ class AppProperties
   end
 
   def frameworks
-    ['MessageUI', 'Social', 'Accounts']
+    ['MessageUI', 'Social', 'Accounts', 'QuartzCore']
   end
 
   def contributors

@@ -26,9 +26,10 @@ class RegistrationScreen < PM::Screen
 
       @email_label = subview(UILabel, :email_label)
       @email_input = subview(UITextField, :email_input, delegate: self)
+      @email_info = subview(UILabel, :email_info)
 
       @cancel_button = subview(UIButton.custom, :cancel_button)
-      @register_button = subview(UIButton.custom, :register_button)
+      @complete_register_button = subview(UIButton.custom, :complete_register_button)
 
 
 
@@ -44,7 +45,7 @@ class RegistrationScreen < PM::Screen
 
     dismiss_keyboard_on_tap
 
-    @register_button.on(:touch) { register }
+    @complete_register_button.on(:touch) { register }
     @cancel_button.on(:touch) { reset; dismiss }
 
   end

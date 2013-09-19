@@ -50,3 +50,12 @@ Teacup.handler UIButton, :padding do |button, hash|
   right = hash[:right] || 0.0
   button.titleEdgeInsets = UIEdgeInsetsMake(0.0, left, 0.0, right)
 end
+
+Teacup.handler UIButton, :titleShadow do |button, bool|
+
+  if bool == true
+    button.titleLabel.shadowOffset = CGSizeMake(0.0, -2.0)
+
+  end
+
+end

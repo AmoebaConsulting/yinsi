@@ -35,6 +35,7 @@ Teacup::Stylesheet.new :application do
     height: 40,
     font: :system.uifont(24),
     contentVerticalAlignment: UIControlContentVerticalAlignmentCenter,
+    autocapitalizationType: UITextAutocapitalizationTypeAllCharacters,
     textAlignment: :right,
     placeholderColor: @white.uicolor(0.4),
     padding: { left: 15, right: 15 },

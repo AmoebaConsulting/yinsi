@@ -21,10 +21,10 @@ Teacup::Stylesheet.new :login do
     font: :normal.uifont(17),
     returnKeyType: :next,
 
+    width: 260,
+    height: 38,
     left: 0,
-    top: 124,
-    width: 162,
-    height: 38
+    top: 124
 
 
 
@@ -34,10 +34,11 @@ Teacup::Stylesheet.new :login do
     font: :normal.uifont(17),
     secure: true,
 
+    width: 260,
+    height: 38,
     left: 0,
-    top: 188,
-    width: 162,
-    height: 38
+    top: 188
+
 
   style :login_button, extends: :big_button,
     height: 80,
@@ -50,7 +51,6 @@ Teacup::Stylesheet.new :login do
     height: 34
 
   style :register_button, extends: :big_button,
-    height: 40,
     title: "REGISTER",
     font: :bold.uifont(17),
     backgroundColor: @green,

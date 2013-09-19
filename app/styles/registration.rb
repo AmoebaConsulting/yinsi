@@ -13,14 +13,14 @@ Teacup::Stylesheet.new :registration do
   style :title,
         text: 'SUBSPEAK',
         numberOfLines: 1,
-        font: :bold.uifont(24),
+        font: :bold.uifont(20),
         textColor: @green_logo,
         textAlignment: :center,
         backgroundColor: :clear,
 
-        width: '100% - 40',
-        height: 40,
-        top: 20,
+        width: '100% - 20',
+        height: 20,
+        top: 10,
         left: 20
 
 
@@ -34,8 +34,8 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         height: 38,
-        top: 80,
-        left: 20
+        top: 40,
+        left: 10
 
   style :user_input, extends: :big_input,
         placeholder: "YOUR CHOICE",
@@ -44,7 +44,7 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         height: 38,
-        top: 120,
+        top: 75,
         left: 0
 
 
@@ -59,8 +59,8 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         height: 38,
-        top: 160,
-        left: 20
+        top: 110,
+        left: 10
 
   style :password_input, extends: :big_input,
         placeholder: "REQUIRED",
@@ -70,7 +70,7 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         height: 38,
-        top: 200,
+        top: 145,
         left: 0
 
   style :confirm_label,
@@ -83,33 +83,33 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         height: 38,
-        top: 240,
-        left: 20
+        top: 180,
+        left: 10
 
   style :confirm_input, extends: :big_input,
-        placeholder: 'RE-ENTER PASSWORD',
+        placeholder: 'REQUIRED',
         returnKeyType: :next,
         font: :normal.uifont(17),
         secure: true,
 
         width: 260,
         height: 38,
-        top: 280,
+        top: 215,
         left: 0
 
 
   style :break_line,
-        text: '- - - - - - - - - - - - - - - - - - - - - - - - - -',
+        text: '- - - - - - - - - - - - - - - - - - - - - - - - - - - -',
         numberOfLines: 1,
         font: :normal.uifont(17),
         textColor: @white.colorWithAlphaComponent(0.4),
         textAlignment: :center,
         backgroundColor: :clear,
 
-        width: '100% - 40',
+        width: '100% - 20',
         height: 20,
-        top: 320,
-        left: 20
+        top: 260,
+        left: 10
 
 
   style :email_label,
@@ -122,8 +122,8 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         height: 38,
-        top: 340,
-        left: 20
+        top: 275,
+        left: 10
 
   style :email_input, extends: :big_input,
         placeholder: 'OPTIONAL',
@@ -132,8 +132,61 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         height: 38,
-        top: 380,
+        top: 310,
         left: 0
+
+  style :email_info,
+        text: 'if provided, this will allow you to reset your password',
+        numberOfLines: 2,
+        font: :bold.uifont(11),
+        textColor: @green_logo,
+        textAlignment: :left,
+        backgroundColor: :clear,
+
+        width: 240,
+        height: 38,
+        top: 350,
+        left: 10
+
+  style :cancel_button, extends: :big_button,
+        title: "<",
+        font: :bold.uifont(20),
+        titleColor: @purple_light,
+        backgroundColor: @purple,
+        contentHorizontalAlignment: UIControlContentHorizontalAlignmentCenter,
+
+        width: 34,
+        height: 34,
+        top: 400,
+        left: 20
+
+
+  style :complete_register_button, extends: :big_button,
+        title: 'REGISTER',
+        font: :bold.uifont(17),
+        titleColor: @purple_light,
+        backgroundColor: @purple,
+        #contentHorizonalAlignment: UIControlContentHorizontalAlignmentCenter,
+        #titleShadow: true,
+
+        width: 120,
+        height: 34,
+        top: 400,
+        left: 140,
+        layer: {
+            shadowOffset: CGSizeMake(0.0, -2.0),
+            shadowRadius: 3,
+            shadowOpacity: 1.0,
+            shadowColor: :blue.uicolor,
+            masksToBounds: false
+        },
+        titleLabel: {
+
+            shadowOffset: CGSizeMake(0.0, -2.0)
+
+        }
+
+
 
 
 

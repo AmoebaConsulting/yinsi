@@ -52,10 +52,20 @@ Teacup.handler UIButton, :padding do |button, hash|
 end
 
 Teacup.handler UIButton, :titleShadow do |button, bool|
-
   if bool == true
     button.titleLabel.shadowOffset = CGSizeMake(0.0, -2.0)
-
   end
+end
 
+Teacup.handler UIView, :shadow do |view, hash|
+  shadow_path = UIBezierPath.bezierPathWithRect(view.bounds)
+  color = hash[:color] || :white.uicolor
+  offset = hash[:offset] || CGSizeMake(0.0, 5.0)
+  opacity = hash[:opacity] || 0.5
+
+  view.layer.masksToBounds = false
+  view.layer.shadowColor = color
+  view.layer.shadowOffset = offset
+  view.layer.shadowOpacity = opacity
+  view.layer.shadowPath = shadow_path.CGPath
 end

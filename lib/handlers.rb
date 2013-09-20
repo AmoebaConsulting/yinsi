@@ -53,28 +53,31 @@ end
 
 # This sets the shadow on UIButton titles (only)
 Teacup.handler UIButton, :titleShadow do |button, hash|
-  color = hash[:color]
-  offset = hash[:offset] || CGSizeMake(0.0, 0.0)
+  color = hash[:color] || :black.uicolor
+  offset = hash[:offset] || CGSizeMake(0,0)
   opacity = hash[:opacity] || 0.4
-  radius = hash[:radius] || 4.0
+  radius = hash[:radius] || 3.0
 
-  button.setTitleShadowColor(color, forState: UIControlStateNormal)
+  button.titleLabel.layer.shadowColor = color.CGColor
   button.titleLabel.shadowOffset = offset
   button.titleLabel.layer.shadowOpacity = opacity
   button.titleLabel.layer.shadowRadius = radius
   button.titleLabel.layer.masksToBounds = false
 end
 
-# This doesn't quite work yet
+# Generic shadow for any view
 Teacup.handler UIView, :shadow do |view, hash|
   shadow_path = UIBezierPath.bezierPathWithRect(view.bounds)
+
   color = hash[:color] || :white.uicolor
-  offset = hash[:offset] || CGSizeMake(0.0, 5.0)
-  opacity = hash[:opacity] || 0.5
+  offset = hash[:offset] || CGSizeMake(0,0)
+  opacity = hash[:opacity] || 0.75
+  radius = hash[:radius] || 15
 
   view.layer.masksToBounds = false
-  view.layer.shadowColor = color
+  view.layer.shadowColor = color.CGColor
   view.layer.shadowOffset = offset
   view.layer.shadowOpacity = opacity
+  view.layer.shadowRadius = radius
   view.layer.shadowPath = shadow_path.CGPath
 end

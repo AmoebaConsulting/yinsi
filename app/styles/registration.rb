@@ -40,10 +40,8 @@ Teacup::Stylesheet.new :registration do
   style :user_input, extends: :big_input,
         placeholder: "YOUR CHOICE",
         returnKeyType: :next,
-        font: :normal.uifont(17),
 
         width: 260,
-        height: 38,
         top: 75,
         left: 0
 
@@ -65,11 +63,9 @@ Teacup::Stylesheet.new :registration do
   style :password_input, extends: :big_input,
         placeholder: "REQUIRED",
         returnKeyType: :next,
-        font: :normal.uifont(17),
         secure: true,
 
         width: 260,
-        height: 38,
         top: 145,
         left: 0
 
@@ -89,11 +85,9 @@ Teacup::Stylesheet.new :registration do
   style :confirm_input, extends: :big_input,
         placeholder: 'REQUIRED',
         returnKeyType: :next,
-        font: :normal.uifont(17),
         secure: true,
 
         width: 260,
-        height: 38,
         top: 215,
         left: 0
 
@@ -128,10 +122,8 @@ Teacup::Stylesheet.new :registration do
   style :email_input, extends: :big_input,
         placeholder: 'OPTIONAL',
         returnKeyType: :go,
-        font: :normal.uifont(17),
 
         width: 260,
-        height: 38,
         top: 310,
         left: 0
 
@@ -151,8 +143,6 @@ Teacup::Stylesheet.new :registration do
   style :cancel_button, extends: :big_button,
         title: "<",
         font: :bold.uifont(20),
-        titleColor: @purple_light,
-        backgroundColor: @purple,
         contentHorizontalAlignment: UIControlContentHorizontalAlignmentCenter,
 
         width: 34,
@@ -163,12 +153,6 @@ Teacup::Stylesheet.new :registration do
 
   style :complete_register_button, extends: :big_button,
         title: 'REGISTER',
-        font: :bold.uifont(17),
-        titleColor: @purple_light,
-        backgroundColor: @purple,
-        titleShadow: {
-          color: @purple_light
-        },
 
         width: 120,
         height: 34,

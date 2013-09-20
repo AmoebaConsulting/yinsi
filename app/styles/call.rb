@@ -26,7 +26,7 @@ Teacup::Stylesheet.new :call do
     backgroundColor: :clear.uicolor,
     hidden: true
 
-  style :call_button, extends: :big_button_dark,
+  style :call_button, extends: :big_button,
     title: "Call",
     font: :bold.uifont(24),
     constraints: [:centered,

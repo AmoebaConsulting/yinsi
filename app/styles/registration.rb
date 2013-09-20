@@ -166,31 +166,13 @@ Teacup::Stylesheet.new :registration do
         font: :bold.uifont(17),
         titleColor: @purple_light,
         backgroundColor: @purple,
-        #contentHorizonalAlignment: UIControlContentHorizontalAlignmentCenter,
-        #titleShadow: true,
+        titleShadow: {
+          color: @purple_light
+        },
 
         width: 120,
         height: 34,
         top: 400,
-        left: 140,
-        layer: {
-            shadowOffset: CGSizeMake(0.0, -2.0),
-            shadowRadius: 3,
-            shadowOpacity: 1.0,
-            shadowColor: :blue.uicolor,
-            masksToBounds: false
-        },
-        titleLabel: {
-
-            shadowOffset: CGSizeMake(0.0, -2.0)
-
-        }
-
-
-
-
-
-
-
+        left: 140
 
 end

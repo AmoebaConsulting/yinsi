@@ -51,12 +51,21 @@ Teacup.handler UIButton, :padding do |button, hash|
   button.titleEdgeInsets = UIEdgeInsetsMake(0.0, left, 0.0, right)
 end
 
-Teacup.handler UIButton, :titleShadow do |button, bool|
-  if bool == true
-    button.titleLabel.shadowOffset = CGSizeMake(0.0, -2.0)
-  end
+# This sets the shadow on UIButton titles (only)
+Teacup.handler UIButton, :titleShadow do |button, hash|
+  color = hash[:color]
+  offset = hash[:offset] || CGSizeMake(0.0, 0.0)
+  opacity = hash[:opacity] || 0.4
+  radius = hash[:radius] || 4.0
+
+  button.setTitleShadowColor(color, forState: UIControlStateNormal)
+  button.titleLabel.shadowOffset = offset
+  button.titleLabel.layer.shadowOpacity = opacity
+  button.titleLabel.layer.shadowRadius = radius
+  button.titleLabel.layer.masksToBounds = false
 end
 
+# This doesn't quite work yet
 Teacup.handler UIView, :shadow do |view, hash|
   shadow_path = UIBezierPath.bezierPathWithRect(view.bounds)
   color = hash[:color] || :white.uicolor

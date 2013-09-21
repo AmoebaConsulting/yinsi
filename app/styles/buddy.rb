@@ -16,10 +16,22 @@ Teacup::Stylesheet.new :buddy do
 
   style :username, extends: :big_input,
         returnKeyType: :go,
-        placeholder: "Enter Username"
+        placeholder: "ENTER USERNAME",
+
+        width: 260,
+        height: 38,
+        top: 124,
+        left: 0
 
   style :add_button, extends: :big_button,
-        title: "Add",
-        font: :bold.uifont(24)
+        title: "ADD",
+        textColor: @purple_light,
+
+        height: 34,
+        width: 120,
+        top: 184,
+        left: 140
+
+
 
 end

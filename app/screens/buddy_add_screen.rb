@@ -2,7 +2,8 @@ class BuddyAddScreen < PM::Screen
   include YinsiHelpers
   include AnimatedTextFields
 
-  title "Add a Buddy"
+  #title "+ CONTACT"
+  title 'Add Buddy'
 
   stylesheet :buddy
 
@@ -12,13 +13,13 @@ class BuddyAddScreen < PM::Screen
       @username = subview(UITextField, :username, delegate: self)
       @add_button = subview(FUIButton, :add_button)
 
-      auto do
-        metrics 'margin' => 20
-
-        vertical "|-75-[username(==40)]-margin-[add_button(==60)]-(>=margin)-|"
-        horizontal "|-margin-[username]-margin-|"
-        horizontal "|-margin-[add_button]-margin-|"
-      end
+      #auto do
+      #  metrics 'margin' => 20
+      #
+      #  vertical "|-75-[username(==40)]-margin-[add_button(==60)]-(>=margin)-|"
+      #  horizontal "|-margin-[username]-margin-|"
+      #  horizontal "|-margin-[add_button]-margin-|"
+      #end
 
       dismiss_keyboard_on_tap
       animate_text_field(@username)

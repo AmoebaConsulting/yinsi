@@ -32,6 +32,7 @@ class RegistrationScreen < PM::Screen
       @complete_register_button = subview(UIButton.custom, :complete_register_button)
 
 
+      #@user_input.animateWithDuration(2, {width: +40}, nil)
 
 
     end

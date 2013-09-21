@@ -19,6 +19,7 @@ Teacup::Stylesheet.new :login do
     returnKeyType: :next,
 
     width: 260,
+    #left: 0,
     left: 0,
     top: 124
 
@@ -28,17 +29,17 @@ Teacup::Stylesheet.new :login do
     secure: true,
 
     width: 260,
+    #left: 0,
     left: 0,
     top: 188
 
 
   style :login_button, extends: :big_button,
-    height: 80,
     title: "CONNECT",
 
-    left: 145,
+    left: 140,
     top: 248,
-    width: 115,
+    width: 120,
     height: 34
 
   style :register_button, extends: :big_button_green,

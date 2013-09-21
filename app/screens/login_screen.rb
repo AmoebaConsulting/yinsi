@@ -10,6 +10,8 @@ class LoginScreen < PM::Screen
   def on_load
     layout (self.view, :root) do
 
+      @did_animate = false
+
       @label = subview(UILabel, :title)
       @username = subview(UITextField, :username, delegate: self)
       @password = subview(UITextField, :password, delegate: self)
@@ -34,11 +36,25 @@ class LoginScreen < PM::Screen
 
     dismiss_keyboard_on_tap
 
+
+    #App.alert("#{@username.class}")
+    #@username.slide :right, 260
+    #@password.slide :right, 260
+
+
+
+
+
     @login_button.on(:touch) { login }
     @register_button.on(:touch) do
       self.open_modal(RegistrationScreen)
     end
 
+  end
+
+  def on_appear
+    @username.slide :left, 100
+    @login_button.slide :left, 150
   end
 
   # Delegate method for text fields exiting focus

@@ -2,6 +2,7 @@ class BuddyScreen < PM::TableScreen
   include YinsiHelpers
   #include Teacup::TableViewDelegate
 
+  #title "CONTACTS"
   title "Buddies"
   indexable
   #searchable placeholder: "Search for a buddy..."
@@ -14,14 +15,15 @@ class BuddyScreen < PM::TableScreen
   stylesheet :buddy
 
   def on_init
+    #set_tab_icon(:group, "contacts")
     set_tab_icon(:group, "Buddies")
     self.view.stylename = :root
 
     set_nav_bar_button :right, system_item: :add, action: :add_buddy
-    set_nav_bar_button :back, title: 'Cancel', style: :plain, action: :back
+    set_nav_bar_button :back, title: '<', style: :plain, action: :back
 
     # Style the navigation bar (& buttons in it)
-    self.navigationController.navigationBar.configureFlatNavigationBarWithColor(stylesheet_var(:green_medium))
+    self.navigationController.navigationBar.configureFlatNavigationBarWithColor(stylesheet_var(:grey_dark))
     UIBarButtonItem.configureFlatButtonsWithColor stylesheet_var(:blackish),
       highlightedColor: stylesheet_var(:grey_dark),
       cornerRadius: 3
@@ -96,6 +98,7 @@ class BuddyScreen < PM::TableScreen
 
   def add_buddy
     open BuddyAddScreen, in_tab: "Buddies"
+    #open BuddyAddScreen, in_tab: "contacts"
   end
 
   def on_refresh

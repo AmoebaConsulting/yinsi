@@ -35,7 +35,8 @@ Teacup::Stylesheet.new :registration do
         width: 260,
         height: 38,
         top: 40,
-        left: 10
+        #left: 10
+        left: 320
 
   style :user_input, extends: :big_input,
         placeholder: "YOUR CHOICE",
@@ -43,7 +44,7 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         top: 75,
-        left: 0
+        left: -260
 
 
   style :password_label,
@@ -58,7 +59,8 @@ Teacup::Stylesheet.new :registration do
         width: 260,
         height: 38,
         top: 110,
-        left: 10
+        #left: 10,
+        left: 320
 
   style :password_input, extends: :big_input,
         placeholder: "REQUIRED",
@@ -67,7 +69,7 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         top: 145,
-        left: 0
+        left: -260
 
   style :confirm_label,
         text: 'CONFIRM:',
@@ -80,7 +82,8 @@ Teacup::Stylesheet.new :registration do
         width: 260,
         height: 38,
         top: 180,
-        left: 10
+        #left: 10
+        left: 320
 
   style :confirm_input, extends: :big_input,
         placeholder: 'REQUIRED',
@@ -89,7 +92,7 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         top: 215,
-        left: 0
+        left: -260
 
 
   style :break_line,
@@ -117,7 +120,8 @@ Teacup::Stylesheet.new :registration do
         width: 260,
         height: 38,
         top: 275,
-        left: 10
+        #left: 10
+        left: 320
 
   style :email_input, extends: :big_input,
         placeholder: 'OPTIONAL',
@@ -125,7 +129,7 @@ Teacup::Stylesheet.new :registration do
 
         width: 260,
         top: 310,
-        left: 0
+        left: -260
 
   style :email_info,
         text: 'if provided, this will allow you to reset your password',
@@ -138,7 +142,8 @@ Teacup::Stylesheet.new :registration do
         width: 240,
         height: 38,
         top: 350,
-        left: 10
+        #left: 10
+        left: -240
 
   style :cancel_button, extends: :big_button,
         title: "<",
@@ -148,7 +153,8 @@ Teacup::Stylesheet.new :registration do
         width: 34,
         height: 34,
         top: 400,
-        left: 20
+        #left: 20
+        left: 320
 
 
   style :complete_register_button, extends: :big_button,
@@ -157,6 +163,7 @@ Teacup::Stylesheet.new :registration do
         width: 120,
         height: 34,
         top: 400,
-        left: 140
+        #left: 140
+        left: 354
 
 end

@@ -47,8 +47,107 @@ class RegistrationScreen < PM::Screen
     dismiss_keyboard_on_tap
 
     @complete_register_button.on(:touch) { register }
-    @cancel_button.on(:touch) { reset; dismiss }
+    @cancel_button.on(:touch) do
+      reset
+      dismiss
+      reset_reg_inputs
+      reset_reg_labels
+    end
 
+  end
+
+  def on_appear
+    reveal_reg_inputs
+    reveal_reg_labels
+  end
+
+  def reveal_reg_inputs
+    @user_input.slide(
+        :right,
+        260,
+        duration: 0.5
+    )
+    @password_input.slide(
+        :right,
+        260,
+        delay: 0.15,
+        duration: 0.5
+    )
+    @confirm_input.slide(
+        :right,
+        260,
+        delay: 0.3,
+        duration: 0.5
+    )
+
+    @email_input.slide(
+        :right,
+        260,
+        delay: 1,
+        duration: 0.5
+    )
+
+    @email_info.slide(
+        :right,
+        250,
+        delay: 1,
+        duration: 0.5
+    )
+
+    @cancel_button.slide(
+        :left,
+        300,
+        duration: 1
+    )
+    @complete_register_button.slide(
+        :left,
+        214,
+        duration: 1
+    )
+  end
+
+  def reveal_reg_labels
+    @user_label.slide(
+        :left,
+        310,
+        duration: 0.5
+    )
+    @password_label.slide(
+        :left,
+        310,
+        delay: 0.15,
+        duration: 0.5
+    )
+    @confirm_label.slide(
+        :left,
+        310,
+        delay: 0.3,
+        duration: 0.5
+    )
+
+    @email_label.slide(
+        :left,
+        310,
+        delay: 1,
+        duration: 0.5
+    )
+  end
+
+  def reset_reg_inputs
+    @user_input.slide :left, 260
+    @password_input.slide :left, 260
+    @confirm_input.slide :left, 260
+    @email_input.slide :left, 260
+    @email_info.slide :left, 250
+    @cancel_button.slide :right, 300
+    @complete_register_button.slide :right, 214
+  end
+
+  def reset_reg_labels
+    @user_label.slide :right, 310
+    @password_label.slide :right, 310
+    @confirm_label.slide :right, 310
+    @email_label.slide :right, 310
   end
 
   def register

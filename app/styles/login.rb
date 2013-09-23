@@ -20,7 +20,7 @@ Teacup::Stylesheet.new :login do
 
     width: 260,
     #left: 0,
-    left: 0,
+    left: -260,
     top: 124
 
   style :password, extends: :big_input,
@@ -30,15 +30,18 @@ Teacup::Stylesheet.new :login do
 
     width: 260,
     #left: 0,
-    left: 0,
+    left: -260,
     top: 188
 
 
   style :login_button, extends: :big_button,
     title: "CONNECT",
+    setAlpha: 0.25,
+    enabled: false,
 
     left: 140,
-    top: 248,
+    #top: 248,
+    top: 368,
     width: 120,
     height: 34
 
@@ -47,9 +50,11 @@ Teacup::Stylesheet.new :login do
     contentHorizontalAlignment: UIControlContentHorizontalAlignmentLeft,
     padding: { right: 10, left: 10 },
 
-    left: 145,
+    #left: 145,
+    left: 320,
     top: 400,
-    width: 315,
+    #width: 315,
+    width: 175,
     height: 34
 
 end

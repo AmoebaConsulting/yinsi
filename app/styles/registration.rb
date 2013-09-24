@@ -35,7 +35,6 @@ Teacup::Stylesheet.new :registration do
         width: 260,
         height: 38,
         top: 40,
-        #left: 10
         left: 320
 
   style :user_input, extends: :big_input,
@@ -82,7 +81,6 @@ Teacup::Stylesheet.new :registration do
         width: 260,
         height: 38,
         top: 180,
-        #left: 10
         left: 320
 
   style :confirm_input, extends: :big_input,
@@ -120,7 +118,6 @@ Teacup::Stylesheet.new :registration do
         width: 260,
         height: 38,
         top: 275,
-        #left: 10
         left: 320
 
   style :email_input, extends: :big_input,
@@ -132,7 +129,7 @@ Teacup::Stylesheet.new :registration do
         left: -260
 
   style :email_info,
-        text: 'if provided, this will allow you to reset your password',
+        text: 'optional and, if provided, this will allow you to reset your password',
         numberOfLines: 2,
         font: :bold.uifont(11),
         textColor: @green_logo,
@@ -142,7 +139,6 @@ Teacup::Stylesheet.new :registration do
         width: 240,
         height: 38,
         top: 350,
-        #left: 10
         left: -240
 
   style :cancel_button, extends: :big_button,
@@ -152,18 +148,15 @@ Teacup::Stylesheet.new :registration do
 
         width: 34,
         height: 34,
-        top: 400,
-        #left: 20
-        left: 320
+        bottom: "100% - 20",
+        left: "100%"
 
 
   style :complete_register_button, extends: :big_button,
         title: 'REGISTER',
-
+        bottom: "100% - 20",
         width: 120,
         height: 34,
-        top: 400,
-        #left: 140
-        left: 354
+        left: "100% + 34"
 
 end

@@ -8,6 +8,7 @@ Teacup::Stylesheet.new :login do
     textColor: @green_logo,
     textAlignment: :center,
     backgroundColor: :clear,
+    setAlpha: 0.0,
 
     top: 50,
     width: '100% - 40',
@@ -19,7 +20,6 @@ Teacup::Stylesheet.new :login do
     returnKeyType: :next,
 
     width: 260,
-    #left: 0,
     left: -260,
     top: 124
 
@@ -29,30 +29,28 @@ Teacup::Stylesheet.new :login do
     secure: true,
 
     width: 260,
-    #left: 0,
     left: -260,
     top: 188
 
 
   style :login_button, extends: :big_button,
     title: "CONNECT",
-    setAlpha: 0.25,
-    enabled: false,
+    #setAlpha: 0.25,
+    #enabled: false,
 
     left: 140,
-    #top: 248,
     top: 368,
     width: 120,
     height: 34
 
-  style :register_button, extends: :big_button_green,
+  style :register_button, extends: :big_button,
     title: "REGISTER",
     contentHorizontalAlignment: UIControlContentHorizontalAlignmentLeft,
     padding: { right: 10, left: 10 },
 
     #left: 145,
-    left: 320,
-    top: 400,
+    left: 370,
+    top: "100% - 80",
     #width: 315,
     width: 175,
     height: 34

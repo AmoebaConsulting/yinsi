@@ -17,6 +17,7 @@ class BuddyScreen < PM::TableScreen
   def on_init
     #set_tab_icon(:group, "contacts")
     set_tab_icon(:group, "Buddies")
+    #set_tab_bar_item icon: { selected: icon, unselected: "mypng.png".uiimage }, title: "Buddies"
     self.view.stylename = :root
 
     set_nav_bar_button :right, system_item: :add, action: :add_buddy

@@ -31,10 +31,6 @@ class RegistrationScreen < PM::Screen
       @cancel_button = subview(UIButton.custom, :cancel_button)
       @complete_register_button = subview(UIButton.custom, :complete_register_button)
 
-
-      #@user_input.animateWithDuration(2, {width: +40}, nil)
-
-
     end
 
     @fields = [@user_input, @password_input, @confirm_input, @email_input]
@@ -96,17 +92,23 @@ class RegistrationScreen < PM::Screen
 
     @cancel_button.slide(
         :left,
-        300,
+        350,
         duration: 1
     )
     @complete_register_button.slide(
         :left,
-        214,
+        264,
         duration: 1
     )
+
+    @cancel_button.animate_to_stylename(:big_button_purple, duration: 2.5)
+    @complete_register_button.animate_to_stylename(:big_button_green, duration: 2.5)
+
+
   end
 
   def reveal_reg_labels
+    @title.fade_in(duration: 1.5)
     @user_label.slide(
         :left,
         310,
@@ -125,6 +127,8 @@ class RegistrationScreen < PM::Screen
         duration: 0.5
     )
 
+    @break_line.fade_in(delay: 1, duration: 0.5)
+
     @email_label.slide(
         :left,
         310,
@@ -134,13 +138,18 @@ class RegistrationScreen < PM::Screen
   end
 
   def reset_reg_inputs
+    @title.fade_out
     @user_input.slide :left, 260
     @password_input.slide :left, 260
     @confirm_input.slide :left, 260
     @email_input.slide :left, 260
     @email_info.slide :left, 250
-    @cancel_button.slide :right, 300
-    @complete_register_button.slide :right, 214
+
+    #these have an additional 50px so their glow is not visible when theyre offscreen
+    @cancel_button.slide :right, 350
+    @complete_register_button.slide :right, 264
+
+    @break_line.fade_out
   end
 
   def reset_reg_labels

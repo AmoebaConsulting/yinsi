@@ -22,7 +22,7 @@ Teacup::Stylesheet.new :application do
   style :root,
     background_gradient: {
       top: :black.uicolor,
-      bottom: "#403942".uicolor
+      bottom: BubbleWrap.rgb_color(20, 0, 18)
     }
 
   style :basic_input,
@@ -37,16 +37,16 @@ Teacup::Stylesheet.new :application do
     textAlignment: :right,
     placeholderColor: @white.uicolor(0.4),
     padding: { left: 15, right: 15 },
-    backgroundColor: @grey_medium,
+    backgroundColor: BubbleWrap.rgba_color(255, 255, 255, 0.2),
     textColor: @white.colorWithAlphaComponent(0.5),
     height: 38
 
   style :big_button,
-    backgroundColor: @purple,
+    backgroundColor: @clouds,
     titleColor: @purple_light,
     font: :bold.uifont(17),
     shadow: {
-      color: @purple,
+      color: @white,
       opacity: 0.75,
       radius: 15
     },
@@ -55,6 +55,22 @@ Teacup::Stylesheet.new :application do
       opacity: 0.4,
       radius: 3.0
     }
+
+
+  style :big_button_purple, extends: :big_button,
+        backgroundColor: @purple,
+        titleColor: @purple_light,
+        shadow: {
+            color: @purple_light,
+            opacity: 0.5,
+            radius: 15
+        },
+        titleShadow: {
+            color: "#6a9a80".to_color,
+            opacity: 1.0,
+            radius: 3.0
+        }
+
 
   style :big_button_green, extends: :big_button,
     backgroundColor: @green,

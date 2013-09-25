@@ -17,6 +17,7 @@ Teacup::Stylesheet.new :registration do
         textColor: @green_logo,
         textAlignment: :center,
         backgroundColor: :clear,
+        setAlpha: 0.0,
 
         width: '100% - 20',
         height: 20,
@@ -94,12 +95,13 @@ Teacup::Stylesheet.new :registration do
 
 
   style :break_line,
-        text: '- - - - - - - - - - - - - - - - - - - - - - - - - - - -',
+        text: '- - - - - - - - - - - - - - - - - - - - - - - - -',
         numberOfLines: 1,
         font: :normal.uifont(17),
         textColor: @white.colorWithAlphaComponent(0.4),
         textAlignment: :center,
         backgroundColor: :clear,
+        setAlpha: 0.0,
 
         width: '100% - 20',
         height: 20,
@@ -148,15 +150,17 @@ Teacup::Stylesheet.new :registration do
 
         width: 34,
         height: 34,
-        bottom: "100% - 20",
-        left: "100%"
+        top: "100% - 80",
+        left: "100% + 50"
 
 
   style :complete_register_button, extends: :big_button,
         title: 'REGISTER',
-        bottom: "100% - 20",
+
+
         width: 120,
         height: 34,
-        left: "100% + 34"
+        top: "100% - 80",
+        left: "100% + 84"
 
 end

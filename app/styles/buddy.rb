@@ -29,7 +29,8 @@ Teacup::Stylesheet.new :buddy do
 
         height: 34,
         width: 120,
-        top: 184,
+        top: 304,
+        #top: 184,
         left: 140
 
 

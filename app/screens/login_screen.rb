@@ -10,7 +10,7 @@ class LoginScreen < PM::Screen
   def on_load
     layout (self.view, :root) do
 
-      @label = subview(UILabel, :title)
+      @title = subview(UILabel, :title)
       @username = subview(UITextField, :username, delegate: self)
       @password = subview(UITextField, :password, delegate: self)
       @login_button = subview(UIButton.custom, :login_button)
@@ -80,42 +80,28 @@ class LoginScreen < PM::Screen
   end
 
   def reveal_inputs
-    @username.slide(
-        :right,
-        260,
-        duration: 0.5
-    )
+    @title.fade_in(duration: 1.5)
 
-    @password.slide(
-        :right,
-        260,
-        delay: 0.15,
-        duration: 0.5
-    )
+    @username.slide(          :right, 260, duration: 0.5)
+    @password.slide(          :right, 260, duration: 0.5, delay: 0.15)
+    @login_button.slide(      :up,    120, duration: 1)
+    @register_button.slide (  :left,  225, duration: 1)
 
-    @login_button.slide(
-        :up,
-        120,
-        duration: 1
-    )
-
-    @register_button.slide :left, 175
+    @login_button.animate_to_stylename(:big_button_purple, duration: 2.5)
+    @register_button.animate_to_stylename(:big_button_green, duration: 2.5)
 
   end
 
   def reset_inputs
+    @title.fade_out
     @username.slide :left, 260
     @password.slide :left, 260
-    @register_button.slide :right, 175
+    @register_button.slide :right, 225
     @login_button.slide :down, 120
+
+    @login_button.animate_to_stylename(:big_button)
+    @register_button.animate_to_stylename(:big_button)
   end
-
-  def ready_login
-
-
-  end
-
-
 
 
   # Delegate method for text fields exiting focus

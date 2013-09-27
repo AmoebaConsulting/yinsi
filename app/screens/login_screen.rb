@@ -34,38 +34,31 @@ class LoginScreen < PM::Screen
 
     dismiss_keyboard_on_tap
 
-    #@login_button.enabled = false
-    #ready_login
 
-    #@username.on :change do
-    #  puts "pw: has(#{@password.hasText})"
+    # THIS WAS FOR DYNAMICALLY ENABLING/DISABLING THE LOGIN BUTTON
+    #@password.on :change do
+    #  puts "user has: (#{@username.hasText})"
+    #  puts "pw has: (#{@password.hasText})"
+    #  if @username.hasText == 1 && @password.hasText == 1
+    #    @login_button.enabled = true
+    #    @login_button.fade_in
+    #  else
+    #    @login_button.enabled = false
+    #    @login_button.fade_out(opacity: 0.25)
+    #  end
     #end
     #
-    #
-
-    @password.on :change do
-      puts "user has: (#{@username.hasText})"
-      puts "pw has: (#{@password.hasText})"
-      if @username.hasText == 1 && @password.hasText == 1
-        @login_button.enabled = true
-        @login_button.fade_in
-      else
-        @login_button.enabled = false
-        @login_button.fade_out(opacity: 0.25)
-      end
-    end
-
-    @username.on :change do
-      puts "user has: (#{@username.hasText})"
-      puts "pw has: (#{@password.hasText})"
-      if @password.hasText == 1 && @username.hasText == 1
-        @login_button.enabled = true
-        @login_button.fade_in
-      else
-        @login_button.enabled = false
-        @login_button.fade_out(opacity: 0.25)
-      end
-    end
+    #@username.on :change do
+    #  puts "user has: (#{@username.hasText})"
+    #  puts "pw has: (#{@password.hasText})"
+    #  if @password.hasText == 1 && @username.hasText == 1
+    #    @login_button.enabled = true
+    #    @login_button.fade_in
+    #  else
+    #    @login_button.enabled = false
+    #    @login_button.fade_out(opacity: 0.25)
+    #  end
+    #end
 
     @login_button.on(:touch) { login }
     @register_button.on(:touch) do
@@ -84,10 +77,12 @@ class LoginScreen < PM::Screen
 
     @username.slide(          :right, 260, duration: 0.5)
     @password.slide(          :right, 260, duration: 0.5, delay: 0.15)
-    @login_button.slide(      :up,    120, duration: 1)
-    @register_button.slide (  :left,  225, duration: 1)
 
+    @login_button.slide(      :up,    120, duration: 1)
+    @login_button.fade_in(duration: 1)
     @login_button.animate_to_stylename(:big_button_purple, duration: 2.5)
+
+    @register_button.slide (  :left,  230, duration: 1)
     @register_button.animate_to_stylename(:big_button_green, duration: 2.5)
 
   end
@@ -99,6 +94,7 @@ class LoginScreen < PM::Screen
     @register_button.slide :right, 225
     @login_button.slide :down, 120
 
+    @login_button.fade_out
     @login_button.animate_to_stylename(:big_button)
     @register_button.animate_to_stylename(:big_button)
   end

@@ -2,7 +2,9 @@ Teacup::Stylesheet.new :buddy do
   import :application
 
   style :root,
-    backgroundColor: @white
+    backgroundColor: @white,
+    clipsToBounds: true
+
 
   style :table_cell,
     backgroundColor: @clouds,
@@ -10,7 +12,23 @@ Teacup::Stylesheet.new :buddy do
     selectionStyle: UITableViewCellSelectionStyleNone
 
   style :table_cell_title,
-    textColor: @blackish
+    textColor: @green_light,
+    font: :bold.uifont(17),
+    width: 160,
+    textAlignment: :right,
+    backgroundColor: @white,
+    left: 0
+
+
+
+
+  style :buddy_cell,
+        backgroundColor: @input_dark,
+
+        height: 40,
+        width: 260,
+        left: 0
+
 
   # Add a buddy screen styles:
 
@@ -21,11 +39,12 @@ Teacup::Stylesheet.new :buddy do
         width: 260,
         height: 38,
         top: 124,
-        left: 0
+        left: -260
 
   style :add_button, extends: :big_button,
         title: "ADD",
         textColor: @purple_light,
+        setAlpha: 0.0,
 
         height: 34,
         width: 120,
@@ -36,3 +55,5 @@ Teacup::Stylesheet.new :buddy do
 
 
 end
+
+

@@ -81,3 +81,7 @@ Teacup.handler UIView, :shadow do |view, hash|
   view.layer.shadowRadius = radius
   view.layer.shadowPath = shadow_path.CGPath
 end
+
+Teacup.handler UITableViewCell, :margin do |view, opts|
+
+end

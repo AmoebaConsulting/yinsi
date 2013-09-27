@@ -1,0 +1,13 @@
+#NOTES
+#replacements:
+#lets say we wanted to say:
+#"the future of our civilization depends on this:"
+#
+#we could break it apart like so:
+#
+#'1.the future'  '2.of our'  '3.civilization' '4.depends' '5.on this'
+#'1the future'  '2of our'  '3civilization' '4depends' '5on this'
+#i'll come up with more methods
+
+#? is it possible to break each sentence in a way that there is only one plausible assembly ?
+#

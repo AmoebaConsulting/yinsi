@@ -24,10 +24,15 @@ class BuddyAddScreen < PM::Screen
     reveal_inputs
   end
 
+  def will_disappear
+    reset_inputs
+  end
+
   def reveal_inputs
     @username.slide(:right, 260, duration: 0.5)
-    @add_button.slide(:up, 120, duration: 1)
 
+    @add_button.fade_in(duration: 1)
+    @add_button.slide(:up, 120, duration: 1)
     @add_button.animate_to_stylename(:big_button_purple)
 
   end
@@ -35,8 +40,10 @@ class BuddyAddScreen < PM::Screen
   def reset_inputs
     @username.slide(:left, 260)
     @add_button.slide(:down, 120)
-
     @add_button.animate_to_stylename(:big_button)
+    @add_button.fade_out
+
+
   end
 
   # Delegate method from username field

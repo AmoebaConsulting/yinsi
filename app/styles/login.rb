@@ -35,7 +35,7 @@ Teacup::Stylesheet.new :login do
 
   style :login_button, extends: :big_button,
     title: "CONNECT",
-    #setAlpha: 0.25,
+    setAlpha: 0.0,
     #enabled: false,
 
     left: 140,
@@ -52,7 +52,7 @@ Teacup::Stylesheet.new :login do
     left: 370,
     top: "100% - 80",
     #width: 315,
-    width: 175,
+    width: 180,
     height: 34
 
 end

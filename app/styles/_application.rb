@@ -19,6 +19,13 @@ Teacup::Stylesheet.new :application do
   @white = "#FFFFFF".to_color
   @clouds = "#ECF0F1".to_color
 
+  #____ NEWER COLORS
+
+  @input_dark = BubbleWrap.rgba_color(255, 255, 255, 0.2)
+
+
+
+
   style :root,
     background_gradient: {
       top: :black.uicolor,
@@ -37,7 +44,7 @@ Teacup::Stylesheet.new :application do
     textAlignment: :right,
     placeholderColor: @white.uicolor(0.4),
     padding: { left: 15, right: 15 },
-    backgroundColor: BubbleWrap.rgba_color(255, 255, 255, 0.2),
+    backgroundColor: @input_dark,
     textColor: @white.colorWithAlphaComponent(0.5),
     height: 38
 
@@ -85,5 +92,10 @@ Teacup::Stylesheet.new :application do
       opacity: 1.0,
       radius: 3.0
     }
+
+  #style :table_cell,
+  #  titleColor: @green_light,
+  #  backgroundColor: @green
+
 
 end

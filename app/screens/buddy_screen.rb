@@ -2,8 +2,8 @@ class BuddyScreen < PM::TableScreen
   include YinsiHelpers
   #include Teacup::TableViewDelegate
 
-  #title "CONTACTS"
-  title "Buddies"
+  title "CONTACTS"
+  #title "Buddies"
   indexable
   #searchable placeholder: "Search for a buddy..."
   refreshable callback: :on_refresh,
@@ -54,18 +54,18 @@ class BuddyScreen < PM::TableScreen
     @table_data = [{
                      cells: Buddy.all.map do |buddy|
                        {
-                         title:         buddy.name,
+                         title:         buddy.name.upcase,
                          #subtitle:      "Added 42 days ago.",
                          action:        :select_buddy,
                          editing_style: :delete,
                          #cell_style:    UITableViewCellStyleSubtitle,
                          cell_class:    StyleableTableCell,
-                         height:        60,
-                         image:         { image: font_awesome_icon(:user, image_size: 150,
-                                                                   color: stylesheet_var(:blackish),
-                                                                   background_color: stylesheet_var(:green)),
-                                          radius: 15 },
-                         #stylename:     :buddy_cell,
+                         #height:        60,
+                         #image:         { image: font_awesome_icon(:user, image_size: 150,
+                          #                                         color: stylesheet_var(:blackish),
+                                                                   #background_color: stylesheet_var(:green)),
+                          #                radius: 15 },
+                         stylename:     :buddy_cell,
                          arguments:     { buddy: buddy }
                        }
                      end
@@ -78,13 +78,21 @@ class BuddyScreen < PM::TableScreen
   end
 
   def table_data_index
-    #all_rows = []
-    #table_data.each do |section|
+    #
+    #letters = []
+    #@table_data.collect do |section|
     #  section[:cells].each do |cell|
-    #    all_rows << cell[:title][0] if !all_rows.include?(cell[:title][0])
+    #    letters << cell[:title][0] if !letters.include?(cell[:title][0])
     #  end
     #end
-    ('a'..'z').to_a
+    #
+    #if letters.length > 15
+    #  letters
+    #else
+    #  nil
+    #end
+
+    #('a'..'z').to_a
   end
 
   #def create_search_bar(params)

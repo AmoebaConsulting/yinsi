@@ -19,7 +19,8 @@ class StyleableTableCell < UITableViewCell
   def stylish
     #self.backgroundColor = UIColor.whiteColor
     #self.selectionStyle = UITableViewCellSelectionStyleNone
-    self.stylename = :table_cell
+    #self.stylename = :table_cell
+    self.stylename = :buddy_cell
     self.textLabel.stylename = :table_cell_title
   end
 

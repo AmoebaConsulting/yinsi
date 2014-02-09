@@ -18,7 +18,6 @@ module AnimatedTextFields
         text_field.off(:all)
       end
     end
-    super.dealloc
   end
 
   private

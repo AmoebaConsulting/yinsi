@@ -5,83 +5,83 @@ GIT
   specs:
     ProMotion (1.0.3)
 
-GIT
-  remote: https://github.com/AmoebaConsulting/motion-cocoapods.git
-  revision: 2b4c171ee427f9b36f8ec78c99164d8934d9f972
-  branch: fix_linking_errors
-  specs:
-    motion-cocoapods (1.3.6)
-      cocoapods (>= 0.17.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (3.2.14)
+    activesupport (3.2.16)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     awesome_print_motion (0.1.0)
     bubble-wrap (1.3.0)
-    claide (0.3.2)
-    cocoapods (0.24.0)
-      activesupport (~> 3.0)
-      claide (~> 0.3.2)
-      cocoapods-core (= 0.24.0)
-      cocoapods-downloader (~> 0.2.0)
+    claide (0.4.0)
+    cocoapods (0.29.0)
+      activesupport (>= 3.2.15, < 4)
+      claide (~> 0.4.0)
+      cocoapods-core (= 0.29.0)
+      cocoapods-downloader (~> 0.3.0)
+      cocoapods-try-release-fix (~> 0.1.1)
       colored (~> 1.2)
       escape (~> 0.0.4)
-      json (~> 1.8)
-      open4 (~> 1.3)
-      xcodeproj (~> 0.10.0)
-    cocoapods-core (0.24.0)
-      activesupport (~> 3.0)
-      json (~> 1.8)
+      json_pure (~> 1.8)
       nap (~> 0.5)
-    cocoapods-downloader (0.2.0)
+      open4 (~> 1.3)
+      xcodeproj (~> 0.14.1)
+    cocoapods-core (0.29.0)
+      activesupport (>= 3.2.15, < 4)
+      fuzzy_match (~> 2.0.4)
+      json_pure (~> 1.8)
+      nap (~> 0.5)
+    cocoapods-downloader (0.3.0)
+    cocoapods-try-release-fix (0.1.1)
     colored (1.2)
     escape (0.0.4)
-    formotion (1.5.0)
+    formotion (1.5.1)
       bubble-wrap (~> 1.3.0)
       motion-require (~> 0.0.3)
-    geomotion (0.12.3)
-    i18n (0.6.5)
-    json (1.8.0)
-    motion-layout (0.0.1)
+    fuzzy_match (2.0.4)
+    geomotion (0.14.0)
+    i18n (0.6.9)
+    json_pure (1.8.1)
+    motion-cocoapods (1.4.0)
+      cocoapods (>= 0.26.2)
+    motion-layout (0.0.2)
     motion-map (0.0.4)
     motion-require (0.0.7)
     motion-rubberstamp (0.0.6)
-    motion-support (0.2.4)
+    motion-support (0.2.6)
       motion-require (>= 0.0.6)
     motion_model (0.4.6)
       bubble-wrap (= 1.3.0)
       motion-support (>= 0.1.0)
-    multi_json (1.8.0)
-    nap (0.5.1)
+    multi_json (1.8.4)
+    nap (0.6.0)
     open4 (1.3.0)
-    rake (10.1.0)
-    sugarcube (1.1.0)
+    rake (10.1.1)
+    sugarcube (1.4.5)
     sweettea (0.6.0)
       rake
       sugarcube
       teacup
-    teacup (2.1.10)
-    xcodeproj (0.10.1)
+    teacup (2.1.13)
+    xcodeproj (0.14.1)
       activesupport (~> 3.0)
       colored (~> 1.2)
+      rake
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   ProMotion!
-  awesome_print_motion (~> 0.1.0)
-  bubble-wrap (~> 1.3.0)
+  awesome_print_motion
+  bubble-wrap
   formotion (~> 1.5.0)
-  geomotion (~> 0.12.3)
-  motion-cocoapods!
-  motion-layout (~> 0.0.1)
-  motion-map (~> 0.0.4)
-  motion-rubberstamp (~> 0.0.6)
+  geomotion
+  motion-cocoapods
+  motion-layout
+  motion-map
+  motion-rubberstamp
   motion_model (~> 0.4.6)
-  sugarcube (~> 1.1.0)
-  sweettea (~> 0.6.0)
-  teacup (~> 2.1.10)
+  sugarcube
+  sweettea
+  teacup

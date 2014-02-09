@@ -109,7 +109,7 @@ class HttpBuilder
     headers = { 'Content-Type' => 'application/json' }
 
     if User.current
-      headers["Authorization"] = "Token token=\"#{User.current.auth_token}\""
+      headers["Authorization"] = "Token token=\"#{User.current.auth_token}\", user_name=\"#{User.current.name}\""
     end
 
     headers

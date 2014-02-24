@@ -55,17 +55,20 @@ class BuddyScreen < PM::TableScreen
                      cells: Buddy.all.map do |buddy|
                        {
                          title:         buddy.name.upcase,
-                         #subtitle:      "Added 42 days ago.",
+                         date_added:    "today",
+                         last_call:     "today",
+                         total_calls:   42,
+                         missed_call:   true,
                          action:        :select_buddy,
                          editing_style: :delete,
-                         #cell_style:    UITableViewCellStyleSubtitle,
-                         cell_class:    StyleableTableCell,
-                         #height:        60,
-                         #image:         { image: font_awesome_icon(:user, image_size: 150,
-                          #                                         color: stylesheet_var(:blackish),
-                                                                   #background_color: stylesheet_var(:green)),
-                          #                radius: 15 },
-                         stylename:     :buddy_cell,
+                         cell_class:    BuddyTableCell,
+                         style:         UITableViewCellStyleDefault,
+                         height:        60,
+                         image:         { image: font_awesome_icon(:user, image_size: 150,
+                                                                   color: stylesheet_var(:blackish),
+                                                                   background_color: stylesheet_var(:green)),
+                                          radius: 15
+                         },
                          arguments:     { buddy: buddy }
                        }
                      end

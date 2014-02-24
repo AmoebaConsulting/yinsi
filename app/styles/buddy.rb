@@ -5,33 +5,31 @@ Teacup::Stylesheet.new :buddy do
     backgroundColor: @white,
     clipsToBounds: true
 
-
-  style :table_cell,
-    backgroundColor: @clouds,
-    #separatorColor: UIColor.redColor,
+  #
+  # Buddy list styles:
+  #
+  style :buddy_cell,
+    backgroundColor: @input_dark,
     selectionStyle: UITableViewCellSelectionStyleNone
+    #separatorColor: UIColor.redColor,
 
-  style :table_cell_title,
+  style :buddy_name,
     textColor: @green_light,
     font: :bold.uifont(17),
     width: 160,
     textAlignment: :right,
-    backgroundColor: @white,
+    #backgroundColor: @white,
     left: 0
 
+  style :buddy_total_calls,
+    textColor: :red.uicolor,
+    text: "Whatever man you stink",
+    left: 0, top: 0, width: 200,
+    font: :bold.uifont(18)
 
-
-
-  style :buddy_cell,
-        backgroundColor: @input_dark,
-
-        height: 40,
-        width: 260,
-        left: 0
-
-
+  #
   # Add a buddy screen styles:
-
+  #
   style :username, extends: :big_input,
         returnKeyType: :go,
         placeholder: "ENTER USERNAME",

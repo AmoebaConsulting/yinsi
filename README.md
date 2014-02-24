@@ -7,5 +7,5 @@ We have written it using RubyMotion w/ ProMotion, TeaCup, and other popular gems
 
 Docs, and a working app coming soon.
 
-Licensed under the MIT license (see LICNESE for more details)
+Licensed under the MIT license (see LICENSE for more details)
 

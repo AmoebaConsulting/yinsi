@@ -13,6 +13,7 @@ resources/*.storyboardc
 *.a
 .dat*
 *.xcodeproj
+.vagrant/*
 
 # Icons are ignored since we have _base versions
 # which are stamped with version information
